@@ -8,7 +8,7 @@ import com.highman.exams.ExamComponent;
 public class ExamResult {
     private final ExamComponent component;
     private final String answer;
-    private final boolean correct;
+    private boolean correct;
 
     /**
      * Creates a new exam result.
@@ -44,5 +44,13 @@ public class ExamResult {
      */
     public boolean isCorrect() {
         return correct;
+    }
+
+    /**
+     * Sets whether this result is correct.
+     * @param correct The new correctness value
+     */
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
     }
 } 

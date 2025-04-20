@@ -1,0 +1,280 @@
+questions:
+  # Multiple Choice Questions
+  - type: MultipleChoice
+    question: "What is the primary purpose of Generics in Java?"
+    choices:
+      - "To allow dynamic resizing of arrays"
+      - "To enforce type safety at compile time"
+      - "To enable runtime type checking"
+      - "To reduce memory usage in collections"
+    correctAnswer: "B"
+    explanation: "Generics enforce type safety by ensuring that only the specified type is used in collections or generic classes, catching type errors at compile time rather than runtime."
+
+  - type: MultipleChoice
+    question: "Which of the following correctly declares a generic method that accepts a List of any type and returns its size?"
+    choices:
+      - "public int getSize(List<?> list) { return list.size(); }"
+      - "public <T> int getSize(List<T> list) { return list.size(); }"
+      - "public int getSize(List<T> list) { return list.size(); }"
+      - "public int getSize(List list) { return list.size(); }"
+    correctAnswer: "B"
+    explanation: "A generic method requires a type parameter (e.g., <T>) before the return type. Option B correctly declares a generic method that works with any List type. Option A uses a wildcard, which is also valid but less specific. Option C lacks the type parameter declaration, and Option D uses a raw type, which is unsafe."
+
+  # True/False Questions
+  - type: TrueFalse
+    question: "Before Generics were introduced in Java, casting objects retrieved from collections could lead to ClassCastException at runtime."
+    correctAnswer: "A"
+    explanation: "True. Pre-Generics collections stored objects as Object, requiring explicit casts when retrieving elements. If the cast was to the wrong type, a ClassCastException occurred at runtime."
+
+  - type: TrueFalse
+    question: "A generic class can only be used with primitive types like int or double."
+    correctAnswer: "B"
+    explanation: "False. Generics work with reference types (e.g., String, Integer). Primitive types cannot be used directly; their wrapper classes (e.g., Integer, Double) are used instead due to type erasure and type safety requirements."
+
+  # Fill in the Blank Questions
+  - type: FillInTheBlank
+    question: "The syntax _______ is used to declare a generic type parameter in a class or method."
+    correctAnswer: "<T>"
+    explanation: "The <T> syntax declares a generic type parameter, acting as a placeholder for a specific type (e.g., String, Integer) when the class or method is used."
+
+  - type: FillInTheBlank
+    question: "The _______ wildcard allows a method to accept a List of Number or any of its subclasses, such as Integer or Double."
+    correctAnswer: "? extends Number"
+    explanation: "The ? extends Number wildcard specifies that a List can contain Number or its subclasses, enabling flexibility while maintaining type safety."
+
+  # Multiple Select Questions
+  - type: MultipleSelect
+    question: "Which of the following are benefits of using Generics in Java? (Select all that apply)"
+    choices:
+      - "Elimination of explicit casting"
+      - "Compile-time type safety"
+      - "Support for primitive types in collections"
+      - "Prevention of ClassCastException at runtime"
+    correctAnswers: ["A", "B", "D"]
+    explanation: "Generics eliminate the need for explicit casting (A), provide compile-time type safety (B), and prevent ClassCastException by ensuring type correctness (D). They do not support primitive types directly (C); wrapper classes are used instead."
+
+  - type: MultipleSelect
+    question: "Which of the following scenarios benefit from using Generics? (Select all that apply)"
+    choices:
+      - "Writing a reusable class that pairs two objects of any type"
+      - "Ensuring a List only contains Strings in a functional pipeline"
+      - "Allowing runtime type changes in a collection"
+      - "Creating a method that processes any subtype of Number"
+    correctAnswers: ["A", "B", "D"]
+    explanation: "Generics support reusable classes like Pair<K, V> (A), type-safe functional pipelines like Stream<String> (B), and methods with bounded types like <T extends Number> (D). Runtime type changes (C) are not supported due to type erasure."
+
+  # Matching Questions
+  - type: Matching
+    question: "Match the Generic concept with its description:"
+    leftItems:
+      - "Type Parameter"
+      - "Wildcard"
+      - "Bounded Type"
+    rightItems:
+      - "Restricts a generic type to a specific class or its subclasses"
+      - "A placeholder like <T> for a specific type"
+      - "Allows flexibility in method parameters, e.g., <?>"
+    correctMatches:
+      "Type Parameter": "A placeholder like <T> for a specific type"
+      "Wildcard": "Allows flexibility in method parameters, e.g., <?>"
+      "Bounded Type": "Restricts a generic type to a specific class or its subclasses"
+    explanation: "Type parameters (e.g., <T>) define generic types, wildcards (e.g., <?>) provide flexibility in method signatures, and bounded types (e.g., <T extends Number>) restrict types to a class hierarchy."
+
+  - type: Matching
+    question: "Match the pre-Generics issue with its consequence:"
+    leftItems:
+      - "Use of Object type"
+      - "Explicit casting"
+      - "Runtime type errors"
+    rightItems:
+      - "Required for retrieving elements, increasing code verbosity"
+      - "Caused ClassCastException if types mismatched"
+      - "Allowed any type in collections, reducing safety"
+    correctMatches:
+      "Use of Object type": "Allowed any type in collections, reducing safety"
+      "Explicit casting": "Required for retrieving elements, increasing code verbosity"
+      "Runtime type errors": "Caused ClassCastException if types mismatched"
+    explanation: "Pre-Generics collections used Object, allowing unsafe additions, required casting, and led to ClassCastException at runtime if types were incorrect."
+
+  # Ordering Questions
+  - type: Ordering
+    question: "Order the steps a compiler takes when processing a generic List<String> to ensure type safety:"
+    items:
+      - "Check that only String objects are added to the List"
+      - "Verify the List declaration uses a specific type"
+      - "Allow retrieval of elements as String without casting"
+    correctOrder:
+      - "Verify the List declaration uses a specific type"
+      - "Check that only String objects are added to the List"
+      - "Allow retrieval of elements as String without casting"
+    explanation: "The compiler first verifies the generic type declaration (List<String>), then ensures only Strings are added, and finally allows type-safe retrieval without casts."
+
+  - type: Ordering
+    question: "Order the following from most to least significant benefit of Generics in large-scale Java projects:"
+    items:
+      - "Improved code readability"
+      - "Compile-time type safety"
+      - "Elimination of ClassCastException"
+    correctOrder:
+      - "Compile-time type safety"
+      - "Elimination of ClassCastException"
+      - "Improved code readability"
+    explanation: "Compile-time type safety prevents errors early, eliminating ClassCastException ensures runtime reliability, and improved readability enhances maintainability, though it’s less critical than safety."
+
+  # Code Questions
+  - type: Code
+    question: "What is the output of the following code?"
+    codeBlock: |
+      import java.util.ArrayList;
+      public class Main {
+          public static void main(String[] args) {
+              ArrayList<String> list = new ArrayList<>();
+              list.add("Java");
+              list.add("Generics");
+              System.out.println(list.get(0) + " " + list.get(1));
+          }
+      }
+    correctAnswer: "Java Generics"
+    explanation: "The ArrayList<String> is type-safe, containing only Strings. The code adds 'Java' and 'Generics', then retrieves and concatenates them with a space, printing 'Java Generics'."
+
+  - type: Code
+    question: "What error occurs when running the following pre-Generics code?"
+    codeBlock: |
+      import java.util.ArrayList;
+      public class Main {
+          public static void main(String[] args) {
+              ArrayList list = new ArrayList();
+              list.add("Hello");
+              list.add(new Integer(42));
+              String text = (String) list.get(1);
+              System.out.println(text);
+          }
+      }
+    correctAnswer: "ClassCastException"
+    explanation: "The ArrayList is not generic, so it accepts any Object. Adding an Integer and casting the second element to String causes a ClassCastException at runtime, as Integer cannot be cast to String."
+
+  # Code Completion Questions
+  - type: CodeCompletion
+    question: "Complete the generic method to return the first element of a List of any type, or null if the List is empty."
+    codeBlock: |
+      public <T> T getFirst(List<T> list) {
+          // Your code here
+      }
+    correctAnswer: |
+      if (list.isEmpty()) return null;
+      return list.get(0);
+    explanation: "The generic method uses <T> to work with any List type. It checks if the list is empty, returning null if so, or returns the first element using get(0), which is type-safe as T."
+
+  - type: CodeCompletion
+    question: "Complete the generic class to store and retrieve a value of any type."
+    codeBlock: |
+      public class Box<T> {
+          private T value;
+          public Box(T value) {
+              this.value = value;
+          }
+          // Your code here
+      }
+    correctAnswer: |
+      public T getValue() {
+          return value;
+      }
+    explanation: "The Box<T> class uses a type parameter T to store a value of any type. The getValue method returns the stored value, which is type-safe as T, eliminating the need for casting."
+
+  # Tracing Questions
+  - type: Tracing
+    question: "Trace the contents of the List at points A, B, and C in the code."
+    codeBlock: |
+      import java.util.ArrayList;
+      public class Main {
+          public static void main(String[] args) {
+              ArrayList<String> list = new ArrayList<>();
+              list.add("Apple");
+              list.add("Banana");
+              // Point A
+              list.add("Cherry");
+              list.remove(0);
+              // Point B
+              list.add("Date");
+              // Point C
+          }
+      }
+    tracePoints:
+      - label: "A"
+        correctAnswer: "[Apple, Banana]"
+      - label: "B"
+        correctAnswer: "[Banana, Cherry]"
+      - label: "C"
+        correctAnswer: "[Banana, Cherry, Date]"
+    explanation: "The ArrayList<String> is type-safe. At A, it contains 'Apple' and 'Banana'. At B, 'Apple' is removed and 'Cherry' is added. At C, 'Date' is added, resulting in [Banana, Cherry, Date]."
+
+  - type: Tracing
+    question: "Trace the state of the Pair object at points A and B in the code."
+    codeBlock: |
+      public class Pair<K, V> {
+          private K key;
+          private V value;
+          public Pair(K key, V value) { this.key = key; this.value = value; }
+          public K getKey() { return key; }
+          public V getValue() { return value; }
+      }
+      public class Main {
+          public static void main(String[] args) {
+              Pair<String, Integer> pair = new Pair<>("Score", 100);
+              // Point A
+              pair = new Pair<>("Level", 5);
+              // Point B
+          }
+      }
+    tracePoints:
+      - label: "A"
+        correctAnswer: "{key: Score, value: 100}"
+      - label: "B"
+        correctAnswer: "{key: Level, value: 5}"
+    explanation: "The Pair<String, Integer> is a generic class. At A, it holds key 'Score' and value 100. At B, a new Pair is assigned with key 'Level' and value 5."
+
+  # Analysis Questions
+  - type: Analysis
+    question: "Analyze the following code to determine if it compiles and, if not, identify the error step-by-step."
+    codeBlock: |
+      import java.util.ArrayList;
+      public class Main {
+          public static void main(String[] args) {
+              ArrayList<String> list = new ArrayList<>();
+              list.add("Hello");
+              list.add(42);
+              System.out.println(list.get(0));
+          }
+      }
+    steps:
+      - label: "Step 1: Declaration"
+        correctAnswer: "ArrayList<String> list = new ArrayList<>(); is valid"
+      - label: "Step 2: Adding first element"
+        correctAnswer: "list.add(\"Hello\") is valid"
+      - label: "Step 3: Adding second element"
+        correctAnswer: "list.add(42) causes a compile-time error"
+      - label: "Step 4: Final result"
+        correctAnswer: "The code does not compile due to type mismatch"
+    explanation: "The ArrayList<String> is restricted to Strings. Adding an Integer (42) violates type safety, causing a compile-time error. The declaration and first add are valid, but the second add fails."
+
+  - type: Analysis
+    question: "Analyze the benefits of rewriting the following non-generic method using Generics, step-by-step."
+    codeBlock: |
+      public Object getMax(Object a, Object b) {
+          if (!(a instanceof Comparable) || !(b instanceof Comparable)) {
+              throw new IllegalArgumentException("Not comparable");
+          }
+          Comparable c1 = (Comparable) a;
+          Comparable c2 = (Comparable) b;
+          return c1.compareTo(c2) >= 0 ? a : b;
+      }
+    steps:
+      - label: "Step 1: Identify current issues"
+        correctAnswer: "Requires casting and runtime type checks"
+      - label: "Step 2: Generic version"
+        correctAnswer: "public <T extends Comparable<T>> T getMax(T a, T b)"
+      - label: "Step 3: Benefits of Generics"
+        correctAnswer: "Type safety, no casting, compile-time checks"
+      - label: "Step 4: Final improvement"
+        correctAnswer: "Safer, cleaner, and more reusable code"
+    explanation: "The non-generic method uses Object, requiring casts and runtime checks. A generic version with <T extends Comparable<T>> ensures type safety, eliminates casts, and makes the method reusable for any comparable type."

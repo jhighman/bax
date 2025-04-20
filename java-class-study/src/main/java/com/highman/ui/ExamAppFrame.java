@@ -44,7 +44,7 @@ public class ExamAppFrame extends JFrame {
             // This callback will be called whenever the answer changes
             System.out.println("Answer updated: " + answer);
         });
-        resultDisplay = new ResultDisplay(this);
+        resultDisplay = new ResultDisplay(this, examState);
 
         // Create main content panel
         JPanel contentPanel = new JPanel(new BorderLayout(5, 5));

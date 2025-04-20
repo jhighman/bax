@@ -107,4 +107,22 @@ public class ExamState {
     public boolean isComplete() {
         return currentQuestionIndex >= components.size();
     }
+
+    /**
+     * Updates the correctness of the most recent answer.
+     * @param isCorrect The new correctness value
+     */
+    public void updateLastResult(boolean isCorrect) {
+        if (!results.isEmpty()) {
+            ExamResult lastResult = results.get(results.size() - 1);
+            if (!lastResult.isCorrect() && isCorrect) {
+                // Only increment score if changing from incorrect to correct
+                score++;
+            } else if (lastResult.isCorrect() && !isCorrect) {
+                // Decrement score if changing from correct to incorrect
+                score--;
+            }
+            lastResult.setCorrect(isCorrect);
+        }
+    }
 } 

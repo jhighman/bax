@@ -1,6 +1,7 @@
 package com.highman.ui;
 
 import com.highman.exams.*;
+import com.highman.logic.ExamState;
 import com.highman.model.ExamResult;
 import javax.swing.*;
 import javax.swing.text.html.HTMLEditorKit;
@@ -15,13 +16,16 @@ import java.util.LinkedHashMap;
  */
 public class ResultDisplay {
     private final JFrame parent;
+    private final ExamState examState;
 
     /**
      * Creates a new ResultDisplay.
      * @param parent The parent frame
+     * @param examState The exam state
      */
-    public ResultDisplay(JFrame parent) {
+    public ResultDisplay(JFrame parent, ExamState examState) {
         this.parent = parent;
+        this.examState = examState;
     }
 
     /**
@@ -115,7 +119,7 @@ public class ResultDisplay {
                 html.append("<div style='margin: 15px 0;'>");
                 html.append("<h4 style='color: #2E86C1; margin-bottom: 10px;'>Code</h4>");
                 html.append("<pre style='background-color: #f8f9fa; padding: 15px; border-radius: 5px; border: 1px solid #e9ecef; font-family: monospace; white-space: pre-wrap;'>");
-                html.append(codeBlock);
+                html.append(escapeHtml(codeBlock));
                 html.append("</pre>");
                 html.append("</div>");
             }
@@ -131,7 +135,7 @@ public class ResultDisplay {
         html.append("<p><strong>Your Answer:</strong> ");
         if (userAnswer != null) {
             html.append("<span style='background-color: ").append(isCorrect ? "#e8f5e9" : "#ffebee").append("; padding: 2px 5px; border-radius: 3px;'>");
-            html.append(userAnswer.replace("\n", "<br>"));
+            html.append("<code>").append(escapeHtml(userAnswer)).append("</code>");
             html.append("</span>");
         } else {
             html.append("<span style='color: #666; font-style: italic;'>Skipped</span>");
@@ -143,7 +147,7 @@ public class ResultDisplay {
         html.append("<div style='margin-bottom: 10px;'>");
         html.append("<p><strong>Correct Answer:</strong> ");
         html.append("<span style='background-color: #e8f5e9; padding: 2px 5px; border-radius: 3px;'>");
-        html.append(component.getCorrectAnswer().replace("\n", "<br>"));
+        html.append("<code>").append(escapeHtml(component.getCorrectAnswer())).append("</code>");
         html.append("</span></p>");
         html.append("</div>");
         html.append("</div>");
@@ -153,14 +157,98 @@ public class ResultDisplay {
         if (explanation != null && !explanation.trim().isEmpty()) {
             html.append("<div style='background-color: #FFF; padding: 20px; border-radius: 5px; border: 1px solid #DDD;'>");
             html.append("<h3 style='color: #2E86C1; margin-top: 0;'>Explanation</h3>");
-            html.append("<p>").append(explanation).append("</p>");
+            html.append(explanation); // Don't escape HTML in explanation as it may contain formatted content
             html.append("</div>");
         }
 
         html.append("</body></html>");
         explanationPane.setText(html.toString());
         
-        showDialog("Question Explanation", explanationPane, true);
+        // Create dialog with override button
+        JDialog dialog = new JDialog(parent, "Question Explanation", true);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        // Set content properties
+        explanationPane.setEditable(false);
+        
+        // Create a panel with proper layout and borders
+        JPanel contentPanel = new JPanel(new BorderLayout(10, 10));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        // Configure scroll pane with proper size constraints
+        JScrollPane scrollPane = new JScrollPane(explanationPane);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        
+        // Set minimum and preferred sizes
+        Dimension preferredSize = new Dimension(800, 600);
+        Dimension minimumSize = new Dimension(400, 300);
+        
+        scrollPane.setPreferredSize(preferredSize);
+        scrollPane.setMinimumSize(minimumSize);
+        explanationPane.setPreferredSize(preferredSize);
+        explanationPane.setMinimumSize(minimumSize);
+        
+        contentPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Create button panel with override option
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+
+        // Add override button if the answer is incorrect
+        if (!isCorrect && userAnswer != null) {
+            JButton overrideButton = new JButton("Override as Correct");
+            overrideButton.addActionListener(e -> {
+                int choice = JOptionPane.showConfirmDialog(dialog,
+                    "Are you sure you want to mark your answer as correct?\n" +
+                    "This will update your score and record this answer as correct.",
+                    "Confirm Override",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+                
+                if (choice == JOptionPane.YES_OPTION) {
+                    examState.updateLastResult(true);
+                    dialog.dispose();
+                }
+            });
+            buttonPanel.add(overrideButton);
+        }
+
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(e -> dialog.dispose());
+        buttonPanel.add(closeButton);
+        
+        contentPanel.add(buttonPanel, BorderLayout.SOUTH);
+        dialog.setContentPane(contentPanel);
+        
+        // Pack and show dialog
+        dialog.pack();
+        
+        // Ensure the dialog fits on screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = Math.min(dialog.getWidth(), screenSize.width - 100);
+        int height = Math.min(dialog.getHeight(), screenSize.height - 100);
+        
+        // Ensure minimum dimensions
+        width = Math.max(width, minimumSize.width);
+        height = Math.max(height, minimumSize.height);
+        
+        dialog.setSize(width, height);
+        dialog.setLocationRelativeTo(parent);
+        dialog.setVisible(true);
+    }
+
+    /**
+     * Escapes HTML special characters in a string.
+     */
+    private String escapeHtml(String text) {
+        if (text == null) return "";
+        return text.replace("&", "&amp;")
+                  .replace("<", "&lt;")
+                  .replace(">", "&gt;")
+                  .replace("\"", "&quot;")
+                  .replace("'", "&#39;")
+                  .replace("\n", "<br>");
     }
 
     /**
