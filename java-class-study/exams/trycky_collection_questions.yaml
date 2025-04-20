@@ -1,0 +1,250 @@
+- type: MultipleChoice
+  question: "You need to store a mapping of employee IDs to their department names, expecting a high number of collisions due to a poor hash function. Which collection should you use to ensure efficient lookups?"
+  choices:
+    - "TreeMap"
+    - "HashMap"
+    - "LinkedHashMap"
+    - "ArrayDeque"
+  correctAnswer: "B"
+  explanation: "HashMap handles collisions by storing entries in a bucket as a linked list, converting to a balanced tree if the bucket size exceeds 8, ensuring efficient lookups even with a poor hash function."
+
+- type: MultipleSelect
+  question: "You need to store a collection of unique event IDs for a calendar app, where the order of events doesn’t matter. Which collections are suitable? (Select all that apply)"
+  choices:
+    - "HashSet"
+    - "TreeSet"
+    - "LinkedList"
+    - "LinkedHashSet"
+  correctAnswers: ["A"]
+  explanation: "HashSet ensures uniqueness with no order, making it suitable for event IDs where order doesn’t matter. TreeSet sorts elements, LinkedHashSet maintains insertion order, and LinkedList allows duplicates."
+
+- type: Matching
+  question: "Match the scenario with the most appropriate collection:"
+  leftItems:
+    - "Store unique project codes with no order"
+    - "Store key-value pairs of user IDs and roles, sorted by ID"
+    - "Store a list of comments, allowing duplicates"
+    - "Store notifications to be processed by urgency"
+  rightItems:
+    - "HashSet"
+    - "TreeMap"
+    - "ArrayList"
+    - "PriorityQueue"
+  correctMatches:
+    "Store unique project codes with no order": "HashSet"
+    "Store key-value pairs of user IDs and roles, sorted by ID": "TreeMap"
+    "Store a list of comments, allowing duplicates": "ArrayList"
+    "Store notifications to be processed by urgency": "PriorityQueue"
+  explanation: "HashSet ensures uniqueness with no order. TreeMap sorts keys (user IDs). ArrayList allows duplicates for comments. PriorityQueue orders notifications by urgency."
+
+- type: MultipleChoice
+  question: "You need to store a collection of pending requests that can be efficiently added to the front and removed from the back. Which collection should you use?"
+  choices:
+    - "ArrayList"
+    - "ArrayDeque"
+    - "TreeSet"
+    - "LinkedHashMap"
+  correctAnswer: "B"
+  explanation: "ArrayDeque, a Deque implementation, supports efficient additions at the front and removals at the back, making it ideal for this scenario."
+
+- type: TrueFalse
+  question: "If you need to store key-value pairs with keys sorted by a custom Comparator, HashMap is the best choice."
+  correctAnswer: "B"
+  explanation: "HashMap doesn’t sort keys. TreeMap, which supports a custom Comparator for sorting keys, is the better choice for this scenario."
+
+- type: Ordering
+  question: "Order the following collections from least to most suitable for storing key-value pairs where keys need to be sorted by a custom Comparator:"
+  items:
+    - "HashMap"
+    - "LinkedHashMap"
+    - "TreeMap"
+    - "ArrayList"
+  correctOrder:
+    - "ArrayList"
+    - "HashMap"
+    - "LinkedHashMap"
+    - "TreeMap"
+  explanation: "ArrayList isn’t a key-value store. HashMap doesn’t sort keys. LinkedHashMap maintains insertion order but doesn’t sort. TreeMap sorts keys using a custom Comparator, making it the most suitable."
+
+- type: MultipleChoice
+  question: "You need to store a thread-safe collection of user sessions with session IDs as keys. Which collection should you use?"
+  choices:
+    - "HashMap"
+    - "ConcurrentHashMap"
+    - "TreeMap"
+    - "LinkedList"
+  correctAnswer: "B"
+  explanation: "ConcurrentHashMap is thread-safe and designed for concurrent access, making it ideal for storing user sessions in a multi-threaded environment."
+
+- type: FillInTheBlank
+  question: "To store a collection of unique department names in alphabetical order, you should use the _______ collection."
+  correctAnswer: "TreeSet"
+  explanation: "TreeSet ensures uniqueness and maintains elements in sorted order (alphabetically, using natural ordering or a Comparator), making it ideal for department names."
+
+- type: MultipleSelect
+  question: "You need to store key-value pairs of order IDs and amounts, maintaining the order of insertion for auditing purposes. Which collections are suitable? (Select all that apply)"
+  choices:
+    - "HashMap"
+    - "TreeMap"
+    - "LinkedHashMap"
+    - "ConcurrentHashMap"
+  correctAnswers: ["C"]
+  explanation: "LinkedHashMap maintains insertion order, making it suitable for auditing. HashMap doesn’t guarantee order, TreeMap sorts by keys, and ConcurrentHashMap focuses on thread safety."
+
+- type: MultipleChoice
+  question: "You need to store a collection of tasks to be processed in a LIFO (Last-In-First-Out) manner. Which collection should you use?"
+  choices:
+    - "ArrayDeque"
+    - "Stack"
+    - "PriorityQueue"
+    - "HashSet"
+  correctAnswer: "B"
+  explanation: "Stack is designed for LIFO operations, making it ideal for processing tasks in a last-in-first-out manner. ArrayDeque can also work but isn’t the classic choice."
+
+- type: TrueFalse
+  question: "If you need to store unique elements with no duplicates and maintain insertion order, TreeSet is the best choice."
+  correctAnswer: "B"
+  explanation: "TreeSet ensures uniqueness but sorts elements, ignoring insertion order. LinkedHashSet is the better choice for maintaining insertion order while ensuring uniqueness."
+
+- type: MultipleChoice
+  question: "You need to store a collection of unique keywords for a search engine, with no concern for order. Which collection should you use?"
+  choices:
+    - "ArrayList"
+    - "HashSet"
+    - "TreeSet"
+    - "LinkedHashMap"
+  correctAnswer: "B"
+  explanation: "HashSet ensures uniqueness and does not maintain order, making it ideal for storing keywords without ordering requirements."
+
+- type: Matching
+  question: "Match the scenario with the most appropriate collection:"
+  leftItems:
+    - "Store unique ticket numbers with no order"
+    - "Store key-value pairs of product IDs and names, sorted by ID"
+    - "Store a list of reviews, allowing duplicates"
+    - "Store alerts to be processed by severity"
+  rightItems:
+    - "HashSet"
+    - "TreeMap"
+    - "ArrayList"
+    - "PriorityQueue"
+  correctMatches:
+    "Store unique ticket numbers with no order": "HashSet"
+    "Store key-value pairs of product IDs and names, sorted by ID": "TreeMap"
+    "Store a list of reviews, allowing duplicates": "ArrayList"
+    "Store alerts to be processed by severity": "PriorityQueue"
+  explanation: "HashSet ensures uniqueness with no order. TreeMap sorts keys (product IDs). ArrayList allows duplicates for reviews. PriorityQueue orders alerts by severity."
+
+- type: MultipleSelect
+  question: "You need to store a collection of commands that can be processed in a FIFO (First-In-First-Out) manner. Which collections are suitable? (Select all that apply)"
+  choices:
+    - "Stack"
+    - "ArrayDeque"
+    - "PriorityQueue"
+    - "LinkedList"
+  correctAnswers: ["B", "D"]
+  explanation: "ArrayDeque and LinkedList can both function as queues (FIFO) by adding elements at the end and removing from the front. Stack is LIFO, and PriorityQueue orders by priority."
+
+- type: MultipleChoice
+  question: "You need to store a list of items that will be frequently accessed by index in a thread-safe manner. Which collection should you use?"
+  choices:
+    - "ArrayList"
+    - "Vector"
+    - "HashSet"
+    - "TreeMap"
+  correctAnswer: "B"
+  explanation: "Vector provides fast random access by index (O(1)) and is thread-safe, making it suitable for this scenario. ArrayList is not thread-safe."
+
+- type: TrueFalse
+  question: "If you need to store key-value pairs with a high number of collisions, LinkedHashMap is the best choice for performance."
+  correctAnswer: "B"
+  explanation: "LinkedHashMap maintains insertion order but doesn’t optimize for collisions. HashMap is better, as it converts buckets to balanced trees when the bucket size exceeds 8, improving performance."
+
+- type: MultipleChoice
+  question: "You need to store a collection of user preferences as key-value pairs, expecting frequent collisions due to similar keys. Which collection should you use?"
+  choices:
+    - "TreeMap"
+    - "HashMap"
+    - "LinkedHashMap"
+    - "PriorityQueue"
+  correctAnswer: "B"
+  explanation: "HashMap handles frequent collisions efficiently by converting buckets to balanced trees when the bucket size exceeds 8, ensuring good performance for lookups."
+
+- type: FillInTheBlank
+  question: "To store a collection of unique book titles in sorted order, you should use the _______ collection."
+  correctAnswer: "TreeSet"
+  explanation: "TreeSet ensures uniqueness and maintains elements in sorted order, making it ideal for storing book titles in sorted order."
+
+- type: MultipleSelect
+  question: "You need to store unique asset IDs in the order they were added. Which collections are suitable? (Select all that apply)"
+  choices:
+    - "HashSet"
+    - "TreeSet"
+    - "LinkedHashSet"
+    - "ArrayDeque"
+  correctAnswers: ["C"]
+  explanation: "LinkedHashSet maintains insertion order while ensuring uniqueness. HashSet doesn’t maintain order, TreeSet sorts elements, and ArrayDeque is for queue operations."
+
+- type: MultipleChoice
+  question: "You need to store a collection of tasks to be processed based on their priority, using a custom Comparator. Which collection should you use?"
+  choices:
+    - "ArrayList"
+    - "HashSet"
+    - "PriorityQueue"
+    - "LinkedHashSet"
+  correctAnswer: "C"
+  explanation: "PriorityQueue orders elements based on priority, which can be defined using a custom Comparator, making it ideal for processing tasks by priority."
+
+- type: Matching
+  question: "Match the scenario with the most appropriate Map implementation:"
+  leftItems:
+    - "Store user data with IDs as keys, expecting collisions"
+    - "Store inventory items with codes as keys, sorted by code"
+    - "Store audit logs with timestamps as keys, in insertion order"
+    - "Store cache data in a thread-safe way"
+  rightItems:
+    - "HashMap"
+    - "TreeMap"
+    - "LinkedHashMap"
+    - "ConcurrentHashMap"
+  correctMatches:
+    "Store user data with IDs as keys, expecting collisions": "HashMap"
+    "Store inventory items with codes as keys, sorted by code": "TreeMap"
+    "Store audit logs with timestamps as keys, in insertion order": "LinkedHashMap"
+    "Store cache data in a thread-safe way": "ConcurrentHashMap"
+  explanation: "HashMap handles collisions efficiently. TreeMap sorts keys. LinkedHashMap maintains insertion order. ConcurrentHashMap is thread-safe."
+
+- type: MultipleChoice
+  question: "You need to store a list of items that will be frequently sorted using a custom Comparator, allowing duplicates. Which collection should you use?"
+  choices:
+    - "ArrayList"
+    - "HashSet"
+    - "TreeSet"
+    - "ArrayDeque"
+  correctAnswer: "A"
+  explanation: "ArrayList allows duplicates and can be sorted using Collections.sort() with a custom Comparator, making it suitable for frequent sorting."
+
+- type: TrueFalse
+  question: "If you need to store unique elements in a sorted order, HashSet is the best choice."
+  correctAnswer: "B"
+  explanation: "HashSet ensures uniqueness but doesn’t sort elements. TreeSet is the better choice for maintaining sorted order while ensuring uniqueness."
+
+- type: MultipleSelect
+  question: "You need to store key-value pairs of customer IDs and orders, sorted by customer ID. Which collections are suitable? (Select all that apply)"
+  choices:
+    - "HashMap"
+    - "TreeMap"
+    - "LinkedHashMap"
+    - "ConcurrentHashMap"
+  correctAnswers: ["B"]
+  explanation: "TreeMap sorts keys (customer IDs) using a Comparator or natural ordering, making it suitable. HashMap and LinkedHashMap don’t sort, and ConcurrentHashMap is for thread safety."
+
+- type: MultipleChoice
+  question: "You need to store a collection of unique labels for a dataset, with no concern for order. Which collection should you use?"
+  choices:
+    - "ArrayList"
+    - "HashSet"
+    - "TreeSet"
+    - "LinkedHashMap"
+  correctAnswer: "B"
+  explanation: "HashSet ensures uniqueness and does not maintain order, making it ideal for storing labels without ordering requirements."

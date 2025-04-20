@@ -1,0 +1,153 @@
+- type: MultipleChoice
+  question: "Which interface is at the top of the Java Collections hierarchy?"
+  choices:
+    - "List"
+    - "Collection"
+    - "Iterable"
+    - "ArrayList"
+  correctAnswer: "C"
+  explanation: "The Iterable interface is at the top of the Collections hierarchy. It provides the ability to iterate over a collection of elements. The Collection interface extends Iterable, and other interfaces like List, Set, and Queue extend Collection."
+
+- type: MultipleSelect
+  question: "Which of the following are true about ArrayList? (Select all that apply)"
+  choices:
+    - "It maintains insertion order"
+    - "It allows duplicate elements"
+    - "It is synchronized by default"
+    - "It allows null elements"
+  correctAnswers: ["A", "B", "D"]
+  explanation: "ArrayList maintains insertion order, allows duplicates and null elements. However, it is not synchronized by default - Vector is the synchronized counterpart to ArrayList."
+
+- type: Matching
+  question: "Match the Collection type with its primary characteristic:"
+  leftItems:
+    - "HashSet"
+    - "TreeSet"
+    - "LinkedList"
+    - "PriorityQueue"
+  rightItems:
+    - "Unique elements with no ordering"
+    - "Sorted elements in natural order"
+    - "Double-ended queue operations"
+    - "Elements ordered by priority"
+  correctMatches:
+    "HashSet": "Unique elements with no ordering"
+    "TreeSet": "Sorted elements in natural order"
+    "LinkedList": "Double-ended queue operations"
+    "PriorityQueue": "Elements ordered by priority"
+  explanation: "Each collection type has specific characteristics that make it suitable for different use cases. HashSet for unique elements, TreeSet for sorted elements, LinkedList for efficient insertions/deletions, and PriorityQueue for priority-based processing."
+
+- type: MultipleChoice
+  question: "What is the time complexity of adding an element to an ArrayList at a specific index?"
+  choices:
+    - "O(1)"
+    - "O(n)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "B"
+  explanation: "Adding an element at a specific index in an ArrayList is O(n) because all elements after the insertion point need to be shifted to make room for the new element. However, adding at the end is amortized O(1)."
+
+- type: TrueFalse
+  question: "HashMap allows null keys and multiple null values."
+  correctAnswer: "A"
+  explanation: "HashMap allows one null key and multiple null values. This is different from Hashtable, which doesn't allow any null keys or values."
+
+- type: Ordering
+  question: "Order the following operations from most to least efficient for ArrayList:"
+  items:
+    - "Get element by index"
+    - "Add element at end"
+    - "Add element at beginning"
+    - "Remove element from end"
+    - "Remove element from beginning"
+  correctOrder:
+    - "Get element by index"
+    - "Add element at end"
+    - "Remove element from end"
+    - "Add element at beginning"
+    - "Remove element from beginning"
+  explanation: "ArrayList operations have different efficiencies: get by index is O(1), add/remove at end is O(1) amortized, while add/remove at beginning is O(n) as it requires shifting elements."
+
+- type: MultipleChoice
+  question: "Which Collection implementation should you use when you need to maintain unique elements in sorted order?"
+  choices:
+    - "ArrayList"
+    - "HashSet"
+    - "TreeSet"
+    - "LinkedList"
+  correctAnswer: "C"
+  explanation: "TreeSet maintains elements in sorted order and ensures uniqueness. It uses a Red-Black tree implementation, providing O(log n) time for add, remove, and search operations."
+
+- type: FillInTheBlank
+  question: "The _______ interface extends Collection and ensures that duplicate elements are not allowed."
+  correctAnswer: "Set"
+  explanation: "The Set interface extends Collection and adds the constraint that duplicate elements are not allowed. Common implementations include HashSet, TreeSet, and LinkedHashSet."
+
+- type: MultipleSelect
+  question: "Which of the following are synchronized Collection implementations? (Select all that apply)"
+  choices:
+    - "Vector"
+    - "Hashtable"
+    - "ArrayList"
+    - "Collections.synchronizedList()"
+  correctAnswers: ["A", "B", "D"]
+  explanation: "Vector and Hashtable are legacy synchronized collections. Modern code typically uses ArrayList/HashMap with Collections.synchronizedList()/synchronizedMap() when synchronization is needed."
+
+- type: MultipleChoice
+  question: "What happens when you try to add an element to a full ArrayDeque?"
+  choices:
+    - "It throws an exception"
+    - "It returns false"
+    - "It automatically expands"
+    - "It overwrites the oldest element"
+  correctAnswer: "C"
+  explanation: "ArrayDeque automatically expands when it reaches capacity. When needed, it creates a new larger array and copies the elements, similar to ArrayList's growth mechanism."
+
+- type: TrueFalse
+  question: "LinkedHashMap maintains the insertion order of its elements by default."
+  correctAnswer: "A"
+  explanation: "LinkedHashMap maintains insertion order by default. This is different from HashMap which makes no guarantees about order, and TreeMap which maintains natural ordering of its keys."
+
+- type: MultipleChoice
+  question: "Which Collection implementation provides the best performance for frequent insertions and deletions in the middle of the list?"
+  choices:
+    - "ArrayList"
+    - "LinkedList"
+    - "Vector"
+    - "ArrayDeque"
+  correctAnswer: "B"
+  explanation: "LinkedList provides O(1) time for insertions and deletions once you have the position, as it only needs to update references. ArrayList requires shifting elements, making it O(n)."
+
+- type: Matching
+  question: "Match the Map implementation with its key characteristic:"
+  leftItems:
+    - "HashMap"
+    - "TreeMap"
+    - "LinkedHashMap"
+    - "ConcurrentHashMap"
+  rightItems:
+    - "Unordered, fast access"
+    - "Sorted by natural order"
+    - "Maintains insertion order"
+    - "Thread-safe operations"
+  correctMatches:
+    "HashMap": "Unordered, fast access"
+    "TreeMap": "Sorted by natural order"
+    "LinkedHashMap": "Maintains insertion order"
+    "ConcurrentHashMap": "Thread-safe operations"
+  explanation: "Different Map implementations serve different purposes: HashMap for fast access, TreeMap for sorted keys, LinkedHashMap for ordered iteration, and ConcurrentHashMap for thread-safe operations."
+
+- type: MultipleSelect
+  question: "Which statements about ConcurrentHashMap are true? (Select all that apply)"
+  choices:
+    - "It allows null keys and values"
+    - "It provides thread-safe operations"
+    - "It locks the entire map for each operation"
+    - "It supports atomic operations like putIfAbsent"
+  correctAnswers: ["B", "D"]
+  explanation: "ConcurrentHashMap is thread-safe and supports atomic operations. It doesn't allow null keys/values, and it uses segment-level locking rather than locking the entire map."
+
+- type: FillInTheBlank
+  question: "The _______ interface is used to define how objects should be compared for sorting in collections."
+  correctAnswer: "Comparable"
+  explanation: "The Comparable interface defines the natural ordering for a class through its compareTo method. Classes that implement Comparable can be sorted using Collections.sort() or used in sorted collections like TreeSet." 

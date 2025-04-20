@@ -1,0 +1,276 @@
+questions:
+  # Multiple Choice: Basic interface concept
+  - type: "multiplechoice"
+    text: "What is the primary purpose of an interface in Java?"
+    choices:
+      - "To define concrete methods with implementation"
+      - "A way to bundle data and methods that operate on that data within a single unit"
+      - "To allow multiple inheritance of classes"
+      - "To create private methods for encapsulation"
+    correct: "B"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>An interface in Java defines a <i>contract</i> that implementing classes must follow. It specifies method signatures that must be implemented, promoting <b>abstraction</b> and <b>loose coupling</b>.</p>
+      <ul>
+        <li><b>Option A:</b> Incorrect. Interfaces primarily contain abstract methods (until Java 8 introduced default methods).</li>
+        <li><b>Option B:</b> Correct! Interfaces define a contract of methods.</li>
+        <li><b>Option C:</b> Incorrect. Java does not support multiple inheritance of classes, but a class can implement multiple interfaces.</li>
+        <li><b>Option D:</b> Incorrect. Private methods are not part of the interface's contract (though Java 9 introduced private methods for internal use).</li>
+      </ul>
+
+  # True/False: Interface properties
+  - type: "truefalse"
+    text: "An interface in Java can contain concrete (implemented) methods."
+    correct: "A"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>Since Java 8, interfaces can contain <b>default methods</b> with implementations, which are concrete. They can also have <b>static methods</b> with implementations since Java 8.</p>
+      <p><span style='color: green;'>This statement is True.</span> Before Java 8, all methods in an interface were abstract, but now interfaces can provide default behavior.</p>
+
+  # Fill-in-the-Blank: Syntax
+  - type: "fillintheblank"
+    text: "The keyword used to make a class implement an interface in Java is ______."
+    correct: "implements"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>The <b>implements</b> keyword is used in a class declaration to specify that the class will provide implementations for the methods defined in an interface.</p>
+      <p><b>Example:</b></p>
+      <pre style='background-color: #E8ECEF; padding: 5px;'>
+      interface Animal {
+          void makeSound();
+      }
+      class Dog implements Animal {
+          public void makeSound() {
+              System.out.println("Woof");
+          }
+      }
+      </pre>
+      <p>The class <b>Dog</b> uses <i>implements</i> to agree to provide an implementation for <b>makeSound()</b>.</p>
+
+  # Matching: Interface-related keywords
+  - type: "matching"
+    text: "Match the Java keyword to its role in interfaces:"
+    leftItems:
+      - "implements"
+      - "default"
+      - "extends"
+    rightItems:
+      - "Used to provide a concrete method in an interface"
+      - "Used by a class to inherit an interface"
+      - "Used by an interface to inherit another interface"
+    correctMatches:
+      "implements": "Used by a class to inherit an interface"
+      "default": "Used to provide a concrete method in an interface"
+      "extends": "Used by an interface to inherit another interface"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>Interfaces use specific keywords to define their behavior and relationships:</p>
+      <ul>
+        <li><b>implements:</b> Used when a class agrees to implement an interface (e.g., <i>class Dog implements Animal</i>).</li>
+        <li><b>default:</b> Introduced in Java 8, allows an interface to provide a concrete method (e.g., <i>default void start() { ... }</i>).</li>
+        <li><b>extends:</b> Used when one interface inherits another (e.g., <i>interface Child extends Parent</i>).</li>
+      </ul>
+
+  # Ordering: Steps to implement an interface
+  - type: "ordering"
+    text: "Arrange the steps to create and use an interface in Java in the correct order:"
+    items:
+      - "Create a class that implements the interface"
+      - "Use the interface type to reference the implementing class object"
+      - "Define the interface with method signatures"
+      - "Implement the interface methods in the class"
+    correctOrder:
+      - "Define the interface with method signatures"
+      - "Create a class that implements the interface"
+      - "Implement the interface methods in the class"
+      - "Use the interface type to reference the implementing class object"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>Using an interface in Java follows a logical sequence:</p>
+      <ol>
+        <li><b>Define the interface:</b> Create the interface with method signatures (e.g., <i>interface Animal { void makeSound(); }</i>).</li>
+        <li><b>Create a class:</b> Declare a class that implements the interface (e.g., <i>class Dog implements Animal</i>).</li>
+        <li><b>Implement the methods:</b> Provide implementations for the interface methods in the class (e.g., <i>public void makeSound() { System.out.println("Woof"); }</i>).</li>
+        <li><b>Use the interface type:</b> Use the interface type to reference objects polymorphically (e.g., <i>Animal dog = new Dog(); dog.makeSound();</i>).</li>
+      </ol>
+      <p>This sequence ensures proper abstraction and polymorphism.</p>
+
+  # Multiple Select: Valid interface properties
+  - type: "multipleselect"
+    text: "Which of the following are true about Java interfaces? (Select all that apply)"
+    choices:
+      - "Interfaces can contain abstract methods"
+      - "Interfaces can contain default methods"
+      - "Interfaces can contain private instance variables"
+      - "Interfaces can contain static methods"
+    correctAnswers:
+      - "A"
+      - "B"
+      - "D"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>Let's break down the properties of Java interfaces:</p>
+      <ul>
+        <li><b>A) Interfaces can contain abstract methods:</b> <span style='color: green;'>True.</span> This is the primary purpose of interfaces (e.g., <i>void makeSound();</i>).</li>
+        <li><b>B) Interfaces can contain default methods:</b> <span style='color: green;'>True.</span> Since Java 8, interfaces can have default methods with implementations (e.g., <i>default void start() { ... }</i>).</li>
+        <li><b>C) Interfaces can contain private instance variables:</b> <span style='color: red;'>False.</span> Interfaces cannot have instance variables; they can only have constants (public static final).</li>
+        <li><b>D) Interfaces can contain static methods:</b> <span style='color: green;'>True.</span> Since Java 8, interfaces can have static methods (e.g., <i>static void utility() { ... }</i>).</li>
+      </ul>
+
+  # Code Snippet: Polymorphism in action
+  - type: "multiplechoice"
+    text: "What is the output of the following code demonstrating polymorphism?"
+    codeSnippet: |
+      interface Animal {
+          void makeSound();
+      }
+      class Dog implements Animal {
+          public void makeSound() {
+              System.out.println("Woof");
+          }
+      }
+      class Cat implements Animal {
+          public void makeSound() {
+              System.out.println("Meow");
+          }
+      }
+      public class Main {
+          public static void main(String[] args) {
+              Animal animal = new Dog();
+              animal.makeSound();
+          }
+      }
+    choices:
+      - "Meow"
+      - "Woof"
+      - "No output"
+      - "Compilation error"
+    correct: "B"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>This code demonstrates <b>polymorphism</b> using an interface:</p>
+      <ul>
+        <li>The variable <i>animal</i> is of type <b>Animal</b> (the interface), but it references a <b>Dog</b> object.</li>
+        <li>When <i>animal.makeSound()</i> is called, Java uses the actual type of the object (<b>Dog</b>) to determine which method to execute.</li>
+        <li>The <b>Dog</b> class implements <i>makeSound()</i> to print "Woof".</li>
+      </ul>
+      <p><b>Output:</b> "Woof"</p>
+      <p><b>Key Concept:</b> This is an example of <i>runtime polymorphism</i>, where the method to be called is determined at runtime based on the object's actual type, not the reference type.</p>
+
+  # Multiple Choice: Polymorphism concept
+  - type: "multiplechoice"
+    text: "What does polymorphism allow in Java?"
+    choices:
+      - "A class to inherit multiple parent classes"
+      - "A variable of a parent type to reference a child type object"
+      - "A method to be private and overridden"
+      - "A class to implement multiple constructors"
+    correct: "B"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p><b>Polymorphism</b> in Java allows for flexibility in how objects are used:</p>
+      <ul>
+        <li><b>Option A:</b> Incorrect. Java does not support multiple inheritance of classes (but a class can implement multiple interfaces).</li>
+        <li><b>Option B:</b> Correct! Polymorphism allows a variable of a parent type (or interface) to reference a child type object (e.g., <i>Animal animal = new Dog();</i>).</li>
+        <li><b>Option C:</b> Incorrect. Private methods cannot be overridden (they are not inherited).</li>
+        <li><b>Option D:</b> Incorrect. Multiple constructors are unrelated to polymorphism (that's method overloading).</li>
+      </ul>
+      <p><b>Key Concept:</b> Polymorphism enables <i>upcasting</i> and dynamic method dispatch.</p>
+
+  # True/False: Polymorphism limitation
+  - type: "truefalse"
+    text: "Using an interface type to reference an object allows you to call methods not defined in the interface."
+    correct: "B"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>When you use an interface type to reference an object (e.g., <i>Animal animal = new Dog();</i>), you can only call methods that are declared in the interface.</p>
+      <p><span style='color: red;'>This statement is False.</span></p>
+      <p><b>Example:</b></p>
+      <pre style='background-color: #E8ECEF; padding: 5px;'>
+      interface Animal {
+          void makeSound();
+      }
+      class Dog implements Animal {
+          public void makeSound() { System.out.println("Woof"); }
+          public void fetch() { System.out.println("Fetching"); }
+      }
+      Animal animal = new Dog();
+      animal.makeSound(); // OK
+      animal.fetch(); // Compilation error: fetch() is not in Animal
+      </pre>
+      <p>To call <i>fetch()</i>, you would need to cast the reference to <b>Dog</b> (e.g., <i>((Dog)animal).fetch();</i>).</p>
+
+  # Fill-in-the-Blank: Interface method type
+  - type: "fillintheblank"
+    text: "By default, methods in a Java interface are ______ and ______."
+    correct: "public abstract"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>In Java, methods declared in an interface are implicitly <b>public</b> and <b>abstract</b> unless specified otherwise (e.g., with <i>default</i> or <i>static</i>).</p>
+      <p><b>Example:</b></p>
+      <pre style='background-color: #E8ECEF; padding: 5px;'>
+      interface Animal {
+          void makeSound(); // Implicitly public abstract
+      }
+      </pre>
+      <p>This means any class implementing the interface must provide a <i>public</i> implementation of the method.</p>
+
+  # Code Snippet: Interface default method
+  - type: "multiplechoice"
+    text: "What is the output of the following code using an interface default method?"
+    codeSnippet: |
+      interface Vehicle {
+          default void start() {
+              System.out.println("Vehicle starting");
+          }
+      }
+      class Car implements Vehicle {
+          // Does not override start()
+      }
+      public class Main {
+          public static void main(String[] args) {
+              Vehicle car = new Car();
+              car.start();
+          }
+      }
+    choices:
+      - "Vehicle starting"
+      - "Car starting"
+      - "No output"
+      - "Compilation error"
+    correct: "A"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>This code demonstrates the use of a <b>default method</b> in an interface:</p>
+      <ul>
+        <li>The <b>Vehicle</b> interface provides a <i>default</i> implementation of the <b>start()</b> method.</li>
+        <li>The <b>Car</b> class implements <b>Vehicle</b> but does not override the <i>start()</i> method.</li>
+        <li>When <i>car.start()</i> is called, the default implementation from the <b>Vehicle</b> interface is used, printing "Vehicle starting".</li>
+      </ul>
+      <p><b>Output:</b> "Vehicle starting"</p>
+      <p><b>Key Concept:</b> Default methods allow interfaces to provide concrete behavior, which implementing classes can use or override.</p>
+
+  # Matching: Polymorphism terms
+  - type: "matching"
+    text: "Match the term to its description in the context of polymorphism:"
+    leftItems:
+      - "Method Overriding"
+      - "Interface Implementation"
+      - "Upcasting"
+    rightItems:
+      - "A subclass provides a specific implementation of a method defined in its superclass"
+      - "A class provides implementations for methods defined in an interface"
+      - "Assigning a subclass object to a superclass or interface type variable"
+    correctMatches:
+      "Method Overriding": "A subclass provides a specific implementation of a method defined in its superclass"
+      "Interface Implementation": "A class provides implementations for methods defined in an interface"
+      "Upcasting": "Assigning a subclass object to a superclass or interface type variable"
+    explanation: |
+      <p><b>Explanation:</b></p>
+      <p>These terms are key to understanding polymorphism:</p>
+      <ul>
+        <li><b>Method Overriding:</b> A subclass redefines a method from its superclass (e.g., a <i>Dog</i> class overriding <i>makeSound()</i> from an <i>Animal</i> superclass).</li>
+        <li><b>Interface Implementation:</b> A class provides concrete implementations for an interface's methods (e.g., <i>Dog</i> implementing <i>Animal</i>'s <i>makeSound()</i>).</li>
+        <li><b>Upcasting:</b> Treating a subclass object as its superclass or interface type (e.g., <i>Animal animal = new Dog();</i>).</li>
+      </ul>
+      <p>These concepts enable flexible and dynamic behavior in Java programs.</p>

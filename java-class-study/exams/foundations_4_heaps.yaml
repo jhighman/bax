@@ -1,0 +1,148 @@
+- type: MultipleChoice
+  question: "What is the defining property of a min-heap?"
+  choices:
+    - "Each parent node is greater than or equal to its children"
+    - "Each parent node is less than or equal to its children"
+    - "Each child node is greater than its parent"
+    - "The root node is the largest value"
+  correctAnswer: "B"
+  explanation: "In a min-heap, each parent node has a value less than or equal to its children, ensuring the smallest value is at the root. Option A describes a max-heap. Options C and D are incorrect as they misrepresent heap properties."
+
+- type: TrueFalse
+  question: "A max-heap always stores the largest value at the root node."
+  correctAnswer: "A"
+  explanation: "True. In a max-heap, each parent node is greater than or equal to its children, so the largest value is always at the root, making it efficient for retrieving the maximum."
+
+- type: FillInTheBlank
+  question: "The process of swapping a newly inserted node with its parent until the heap property is restored is called _______."
+  correctAnswer: "Bubble-up"
+  explanation: "Bubble-up occurs after inserting a node at the end of a heap. The node is compared and swapped with its parent if it violates the heap property (e.g., smaller than parent in a min-heap), continuing until the property is restored."
+
+- type: Matching
+  question: "Match the heap operation with its description:"
+  leftItems:
+    - "Insert"
+    - "Remove Root"
+    - "Bubble-up"
+    - "Bubble-down"
+  rightItems:
+    - "Swap node with parent to restore heap property"
+    - "Add node at the end and adjust upward"
+    - "Replace root with last node and adjust downward"
+    - "Swap node with smaller/larger child to restore heap property"
+  correctMatches:
+    Insert: "Add node at the end and adjust upward"
+    Remove Root: "Replace root with last node and adjust downward"
+    Bubble-up: "Swap node with parent to restore heap property"
+    Bubble-down: "Swap node with smaller/larger child to restore heap property"
+  explanation: "Insert adds a node and bubbles up. Remove Root replaces the root with the last node and bubbles down. Bubble-up fixes heap property upward, and bubble-down fixes it downward."
+
+- type: Ordering
+  question: "Arrange the steps to insert a value into a min-heap:"
+  items:
+    - "Add value at the end of the array"
+    - "Compare value with its parent"
+    - "Swap with parent if value is smaller"
+    - "Repeat comparison until heap property is restored"
+    - "Increase heap size"
+  correctOrder:
+    - "Add value at the end of the array"
+    - "Increase heap size"
+    - "Compare value with its parent"
+    - "Swap with parent if value is smaller"
+    - "Repeat comparison until heap property is restored"
+  explanation: "1. Add the value at the array’s end. 2. Increment heap size. 3. Compare with parent’s value. 4. Swap if the value is smaller (min-heap). 5. Continue until the value is not smaller than its parent or it’s at the root."
+
+- type: MultipleSelect
+  question: "Which of the following are true about heap implementation using a 1-indexed array? (Select all that apply)"
+  choices:
+    - "The left child of node at index i is at 2i"
+    - "The parent of node at index i is at i/2"
+    - "The right child of node at index i is at 2i+1"
+    - "The array must be sorted in ascending order"
+  correctAnswers: ["A", "B", "C"]
+  explanation: "Option A is true: Left child is at 2i. Option B is true: Parent is at floor(i/2). Option C is true: Right child is at 2i+1 in a 1-indexed heap. Option D is false: Heaps maintain the heap property, not a sorted order."
+
+- type: MultipleChoice
+  question: "Consider a min-heap with values [10, 20, 30, 40, 50]. After inserting 5, what is the new root value?"
+  choices:
+    - "5"
+    - "10"
+    - "20"
+    - "30"
+  correctAnswer: "A"
+  explanation: "Inserting 5 into a min-heap places 5 at the end ([10, 20, 30, 40, 50, 5]). Bubble-up compares 5 with its parent (e.g., 50, then higher nodes), swapping until 5 reaches the root, as it’s the smallest value."
+
+- type: TrueFalse
+  question: "An array can be a valid min-heap and max-heap at the same time."
+  correctAnswer: "B"
+  explanation: "False. A min-heap requires parents to be less than or equal to children, while a max-heap requires parents to be greater than or equal to children. These properties are mutually exclusive unless the heap has identical values."
+
+- type: MultipleChoice
+  question: "How do you check if an array is a valid min-heap?"
+  choices:
+    - "Ensure each node is greater than its parent"
+    - "Ensure each node is less than its parent"
+    - "Ensure each parent is less than or equal to its children"
+    - "Ensure the array is sorted in ascending order"
+  correctAnswer: "C"
+  explanation: "To verify a min-heap, check that each parent node (at index i) has a value less than or equal to its children (at 2i and 2i+1). Option A describes a max-heap, B is incorrect, and D is not required for heaps."
+
+- type: MultipleSelect
+  question: "Which of the following are true about removing the root from a max-heap? (Select all that apply)"
+  choices:
+    - "The last node replaces the root"
+    - "Bubble-up is performed after replacement"
+    - "Bubble-down is performed after replacement"
+    - "The operation takes O(log n) time"
+  correctAnswers: ["A", "C", "D"]
+  explanation: "Option A is true: The root is replaced with the last node. Option C is true: Bubble-down swaps the new root with the larger child to restore the max-heap property. Option D is true: Bubble-down takes O(log n) for a heap of height log n. Option B is false: Bubble-up is for insertions."
+
+- type: FillInTheBlank
+  question: "In a 1-indexed heap, the index of the left child of a node at index i is _______."
+  correctAnswer: "2i"
+  explanation: "In a 1-indexed heap, the left child of a node at index i is at index 2i, and the right child is at 2i+1. This simplifies calculations compared to 0-indexed arrays."
+
+- type: MultipleChoice
+  question: "What is the worst-case time complexity of inserting a value into a heap with n nodes?"
+  choices:
+    - "O(1)"
+    - "O(n)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "C"
+  explanation: "Inserting into a heap involves adding a value at the end (O(1)) and bubbling up to restore the heap property. Bubble-up traverses at most the heap’s height, which is O(log n)."
+
+- type: Matching
+  question: "Match the heap type with its use case:"
+  leftItems:
+    - "Min-heap"
+    - "Max-heap"
+  rightItems:
+    - "Efficiently retrieve the largest element"
+    - "Efficiently retrieve the smallest element"
+  correctMatches:
+    Min-heap: "Efficiently retrieve the smallest element"
+    Max-heap: "Efficiently retrieve the largest element"
+  explanation: "Min-heaps keep the smallest value at the root, ideal for priority queues needing the minimum. Max-heaps keep the largest value at the root, useful for tasks like finding the maximum quickly."
+
+- type: TrueFalse
+  question: "Bubble-down in a min-heap swaps a node with its smallest child if the node is larger."
+  correctAnswer: "A"
+  explanation: "True. Bubble-down in a min-heap compares a node with its children and swaps with the smallest child if the node’s value is larger, continuing until the min-heap property (parent ≤ children) is restored."
+
+- type: Ordering
+  question: "Arrange the steps to remove the root from a max-heap:"
+  items:
+    - "Replace root with the last node"
+    - "Return the original root value"
+    - "Decrease heap size"
+    - "Compare new root with its children"
+    - "Swap with larger child if necessary"
+  correctOrder:
+    - "Return the original root value"
+    - "Replace root with the last node"
+    - "Decrease heap size"
+    - "Compare new root with its children"
+    - "Swap with larger child if necessary"
+  explanation: "1. Save and return the root’s value. 2. Replace the root with the last node in the array. 3. Decrease the heap size. 4. Compare the new root with its children. 5. Swap with the larger child (max-heap) if the root is smaller, continuing downward."

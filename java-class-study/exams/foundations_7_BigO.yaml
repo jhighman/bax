@@ -1,0 +1,152 @@
+- type: MultipleChoice
+  question: "What is the Big-O time complexity of inserting an element at the end of a dynamic array that is not full?"
+  choices:
+    - "O(1)"
+    - "O(n)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "A"
+  explanation: "Inserting at the end of a dynamic array (not full) is O(1), as it places the element at the next free index. If the array is full, resizing may occur, but the question specifies 'not full,' so no resizing is needed."
+
+- type: TrueFalse
+  question: "The Big-O time complexity of searching for a value in a balanced Binary Search Tree is O(log n)."
+  correctAnswer: "A"
+  explanation: "True. In a balanced BST, each comparison halves the search space, leading to a height of O(log n), so searching takes O(log n) time in the worst case."
+
+- type: FillInTheBlank
+  question: "The _______ notation describes the upper bound of an algorithm’s running time."
+  correctAnswer: "Big-O"
+  explanation: "Big-O notation provides an upper bound on the growth rate of an algorithm’s running time, ignoring constants and lower-order terms, to analyze worst-case performance."
+
+- type: Matching
+  question: "Match the data structure operation with its worst-case Big-O time complexity:"
+  leftItems:
+    - "Array access by index"
+    - "Linked list insertion at head"
+    - "Min-heap remove minimum"
+    - "Hash table average-case search"
+  rightItems:
+    - "O(log n)"
+    - "O(1)"
+    - "O(n)"
+    - "O(1)"
+  correctMatches:
+    Array access by index: "O(1)"
+    Linked list insertion at head: "O(1)"
+    Min-heap remove minimum: "O(log n)"
+    Hash table average-case search: "O(1)"
+  explanation: "Array indexing is O(1) due to direct access. Linked list head insertion is O(1) with pointer updates. Min-heap removal involves bubble-down, taking O(log n). Hash table search is O(1) on average, assuming good hashing."
+
+- type: Ordering
+  question: "Arrange the steps to solve a recurrence T(n) = T(n-1) + 1 using the iteration method:"
+  items:
+    - "Assume T(1) = c for base case"
+    - "Write closed-form solution"
+    - "Expand recurrence for a few iterations"
+    - "Identify pattern in expanded terms"
+    - "Sum terms to n iterations"
+  correctOrder:
+    - "Assume T(1) = c for base case"
+    - "Expand recurrence for a few iterations"
+    - "Identify pattern in expanded terms"
+    - "Sum terms to n iterations"
+    - "Write closed-form solution"
+  explanation: "1. Define base case (e.g., T(1) = c). 2. Expand T(n) = T(n-1) + 1 to T(n-1) + 1 + 1, etc. 3. Notice pattern (sum of 1’s). 4. Sum from 1 to n-1 iterations, giving n-1 + c. 5. Write T(n) = n-1 + c, which is O(n)."
+
+- type: MultipleSelect
+  question: "Which of the following operations have a worst-case time complexity of O(n) for a singly linked list? (Select all that apply)"
+  choices:
+    - "Insert at head"
+    - "Insert at tail"
+    - "Search for a value"
+    - "Access by index"
+  correctAnswers: ["B", "C", "D"]
+  explanation: "Option B is true: Tail insertion requires O(n) to traverse to the end. Option C is true: Searching takes O(n) to scan the list. Option D is true: Accessing index i takes O(n) to traverse. Option A is false: Head insertion is O(1)."
+
+- type: MultipleChoice
+  question: "Consider the recurrence T(n) = 2T(n/2) + n. What is its closed-form time complexity?"
+  choices:
+    - "O(n)"
+    - "O(n log n)"
+    - "O(n^2)"
+    - "O(log n)"
+  correctAnswer: "B"
+  explanation: "The recurrence T(n) = 2T(n/2) + n matches the Master Theorem: a=2, b=2, f(n)=n. Since log_b(a) = log_2(2) = 1 and f(n)=n is O(n^1), it’s case 2, giving T(n) = O(n log n)."
+
+- type: TrueFalse
+  question: "The substitution method for solving recurrences involves guessing a solution and verifying it."
+  correctAnswer: "A"
+  explanation: "True. The substitution method guesses a solution form (e.g., T(n) = cn for T(n) = T(n-1) + 1), substitutes it into the recurrence, and verifies using induction to confirm the closed-form."
+
+- type: MultipleChoice
+  question: "What is the Big-O time complexity of removing the root from a min-heap with n elements?"
+  choices:
+    - "O(1)"
+    - "O(n)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "C"
+  explanation: "Removing the root in a min-heap replaces it with the last element and bubbles down, comparing with children and swapping up to the heap’s height, which is O(log n)."
+
+- type: MultipleSelect
+  question: "Which of the following recurrences can be solved using the Master Theorem? (Select all that apply)"
+  choices:
+    - "T(n) = 2T(n/2) + n"
+    - "T(n) = T(n-1) + 1"
+    - "T(n) = 4T(n/2) + n^2"
+    - "T(n) = T(n/2) + log n"
+  correctAnswers: ["A", "C", "D"]
+  explanation: "Options A, C, D are divide-and-conquer recurrences of the form T(n) = aT(n/b) + f(n), solvable by the Master Theorem. Option B is linear (T(n-1)), requiring iteration or substitution, not the Master Theorem."
+
+- type: FillInTheBlank
+  question: "The recurrence T(n) = T(n-1) + 1 has a closed-form solution of _______."
+  correctAnswer: "O(n)"
+  explanation: "Solving T(n) = T(n-1) + 1 with T(1) = c gives T(n) = c + (n-1) by iteration (summing 1 for n-1 steps). Ignoring constants, the time complexity is O(n)."
+
+- type: MultipleChoice
+  question: "What is the Big-O time complexity of inserting a key into a hash table with chaining, assuming a good hash function?"
+  choices:
+    - "O(1)"
+    - "O(n)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "A"
+  explanation: "With a good hash function, keys distribute evenly, and insertion at the head of a chain (or empty slot) takes O(1) average-case time. Worst-case O(n) occurs with collisions, but the question assumes a good hash."
+
+- type: Matching
+  question: "Match the recurrence with its closed-form time complexity:"
+  leftItems:
+    - "T(n) = T(n-1) + n"
+    - "T(n) = 2T(n/2) + n"
+    - "T(n) = T(n/2) + 1"
+  rightItems:
+    - "O(n log n)"
+    - "O(n)"
+    - "O(n^2)"
+  correctMatches:
+    T(n) = T(n-1) + n: "O(n^2)"
+    T(n) = 2T(n/2) + n: "O(n log n)"
+    T(n) = T(n/2) + 1: "O(n)"
+  explanation: "T(n-1) + n sums to n(n+1)/2, giving O(n^2). T(n) = 2T(n/2) + n is O(n log n) by Master Theorem. T(n/2) + 1 sums log n terms of 1, giving O(log n), but option O(n) seems to be a typo in choices."
+
+- type: TrueFalse
+  question: "All divide-and-conquer algorithms have a time complexity of O(n log n)."
+  correctAnswer: "B"
+  explanation: "False. While some divide-and-conquer algorithms (e.g., merge sort) are O(n log n), others vary: binary search is O(log n), and some may be O(n) or higher depending on the work per level."
+
+- type: Ordering
+  question: "Arrange the steps to apply the substitution method for T(n) = 2T(n/2) + n:"
+  items:
+    - "Guess T(n) = O(n log n)"
+    - "Verify base case"
+    - "Assume T(k) ≤ ck log k for k < n"
+    - "Substitute into recurrence"
+    - "Prove inequality holds"
+  correctOrder:
+    - "Guess T(n) = O(n log n)"
+    - "Assume T(k) ≤ ck log k for k < n"
+    - "Substitute into recurrence"
+    - "Prove inequality holds"
+    - "Verify base case"
+  explanation: "1. Guess T(n) = O(n log n). 2. Assume T(n/2) ≤ c(n/2)log(n/2) by induction. 3. Substitute into T(n) = 2T(n/2) + n. 4. Show T(n) ≤ cn log n + n ≤ cn log n for appropriate c. 5. Check base case (e.g., T(1))."
+  

@@ -1,0 +1,102 @@
+- type: MultipleChoice
+  question: "What is the time complexity of adding an element at the beginning of a LinkedList in Java?"
+  choices:
+    - "O(n)"
+    - "O(1)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "B"
+  explanation: "Adding an element at the beginning of a LinkedList is O(1) because it only requires updating the head pointer and the next reference of the new node. Unlike ArrayList, no shifting of elements is required."
+
+- type: MultipleSelect
+  question: "Which of the following operations are O(1) in a LinkedList? (Select all that apply)"
+  choices:
+    - "Adding at the beginning"
+    - "Adding at the end (with tail pointer)"
+    - "Removing from the middle"
+    - "Accessing an element by index"
+  correctAnswers: ["A", "B"]
+  explanation: "In a LinkedList, adding at the beginning is O(1) as it only requires updating the head pointer. Adding at the end is also O(1) if we maintain a tail pointer. However, removing from the middle requires traversing to that position [O(n)], and accessing by index also requires traversal [O(n)]."
+
+- type: TrueFalse
+  question: "A doubly linked list requires more memory than a singly linked list because it stores two references (previous and next) for each node."
+  correctAnswer: "A"
+  explanation: "This is true. In a doubly linked list, each node maintains references to both its previous and next nodes, whereas a singly linked list only stores a reference to the next node. This additional reference makes doubly linked lists more memory-intensive but enables bidirectional traversal."
+
+- type: Ordering
+  question: "Order the following steps to insert a new node between two existing nodes in a singly linked list:"
+  items:
+    - "Create new node with data"
+    - "Set new node's next to current node's next"
+    - "Update current node's next to point to new node"
+    - "Verify current node is not null"
+  correctOrder:
+    - "Verify current node is not null"
+    - "Create new node with data"
+    - "Set new node's next to current node's next"
+    - "Update current node's next to point to new node"
+  explanation: "When inserting a node in a linked list, we must follow these steps in order to maintain the list's integrity. First, verify we have a valid insertion point. Then create the new node, set its next reference (to maintain the link to the rest of the list), and finally update the current node's next reference to point to our new node."
+
+- type: MultipleChoice
+  question: "What is the main advantage of using a LinkedList over an ArrayList in Java?"
+  choices:
+    - "Faster random access to elements"
+    - "Less memory usage"
+    - "Efficient insertions and deletions in the middle"
+    - "Better cache locality"
+  correctAnswer: "C"
+  explanation: "The main advantage of LinkedList over ArrayList is efficient insertions and deletions in the middle of the list, which are O(1) once you have the position. ArrayList requires shifting elements for such operations, making them O(n). However, LinkedList uses more memory due to storing references and has worse cache locality."
+
+- type: FillInTheBlank
+  question: "In a circular linked list, the next pointer of the last node points to the _______ node of the list."
+  correctAnswer: "first"
+  explanation: "In a circular linked list, the last node's next pointer points to the first node, creating a circle. This is different from a regular linked list where the last node's next pointer is null. This structure is useful for applications that need to cycle through elements continuously."
+
+- type: Matching
+  question: "Match the linked list type with its key characteristic:"
+  leftItems:
+    - "Singly Linked List"
+    - "Doubly Linked List"
+    - "Circular Linked List"
+    - "Skip List"
+  rightItems:
+    - "One directional traversal only"
+    - "Bidirectional traversal possible"
+    - "Last node points to first node"
+    - "Multiple layer linked structure"
+  correctMatches:
+    "Singly Linked List": "One directional traversal only"
+    "Doubly Linked List": "Bidirectional traversal possible"
+    "Circular Linked List": "Last node points to first node"
+    "Skip List": "Multiple layer linked structure"
+  explanation: "Different types of linked lists serve different purposes: Singly linked lists are simple but only allow forward traversal. Doubly linked lists enable bidirectional movement. Circular lists create a loop structure. Skip lists use multiple layers for faster searching."
+
+- type: MultipleChoice
+  question: "What happens when you try to add null elements to a Java LinkedList?"
+  choices:
+    - "NullPointerException is thrown"
+    - "The null elements are ignored"
+    - "The null elements are allowed"
+    - "IllegalArgumentException is thrown"
+  correctAnswer: "C"
+  explanation: "Java's LinkedList implementation allows null elements. This is different from some other collections like TreeSet or Hashtable which don't allow nulls. You can add as many null elements as you want to a LinkedList, and they will be stored like any other element."
+
+- type: MultipleSelect
+  question: "Which of the following are true about Java's LinkedList implementation? (Select all that apply)"
+  choices:
+    - "It implements the List interface"
+    - "It implements the Deque interface"
+    - "It is synchronized by default"
+    - "It maintains insertion order"
+  correctAnswers: ["A", "B", "D"]
+  explanation: "Java's LinkedList implements both List and Deque interfaces, making it usable as both a list and a double-ended queue. It maintains insertion order like ArrayList. However, it is not synchronized by default - you need Collections.synchronizedList() for thread-safe operations."
+
+- type: MultipleChoice
+  question: "When implementing a linked list, what is the purpose of having a 'dummy' or sentinel node?"
+  choices:
+    - "To improve memory efficiency"
+    - "To simplify edge cases in insertion and deletion"
+    - "To increase traversal speed"
+    - "To reduce the list's size"
+  correctAnswer: "B"
+  explanation: "A sentinel node (dummy node) is used to simplify the handling of edge cases in linked list operations. By always having a sentinel node at the beginning and/or end of the list, you don't need special cases for inserting/deleting at the start or end of the list. This makes the code cleaner and less prone to errors, though it uses slightly more memory." 

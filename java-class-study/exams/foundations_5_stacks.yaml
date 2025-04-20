@@ -1,0 +1,155 @@
+- type: MultipleChoice
+  question: "What is the primary characteristic of a stack data structure?"
+  choices:
+    - "First-In, First-Out (FIFO)"
+    - "Last-In, First-Out (LIFO)"
+    - "Elements are sorted"
+    - "Random access to elements"
+  correctAnswer: "B"
+  explanation: "A stack follows the Last-In, First-Out (LIFO) principle, where the last element added (pushed) is the first removed (popped). Option A describes a queue, C is incorrect as stacks don’t sort, and D is not typical for stacks."
+
+- type: TrueFalse
+  question: "A queue implemented with a linked list can perform enqueue and dequeue in O(1) time."
+  correctAnswer: "A"
+  explanation: "True. In a linked list queue with head and tail pointers, enqueue adds a node at the tail (O(1)), and dequeue removes a node from the head (O(1)), assuming pointers are updated correctly."
+
+- type: FillInTheBlank
+  question: "The operation that adds an element to the top of a stack is called _______."
+  correctAnswer: "Push"
+  explanation: "The push operation adds an element to the top of a stack, increasing its size. The corresponding operation to remove the top element is called pop."
+
+- type: Matching
+  question: "Match the stack/queue operation with its description:"
+  leftItems:
+    - "Stack Push"
+    - "Stack Pop"
+    - "Queue Enqueue"
+    - "Queue Dequeue"
+  rightItems:
+    - "Remove element from the front"
+    - "Add element to the top"
+    - "Add element to the rear"
+    - "Remove element from the top"
+  correctMatches:
+    Stack Push: "Add element to the top"
+    Stack Pop: "Remove element from the top"
+    Queue Enqueue: "Add element to the rear"
+    Queue Dequeue: "Remove element from the front"
+  explanation: "Stack push/pop operate on the top (LIFO). Queue enqueue adds to the rear, and dequeue removes from the front (FIFO)."
+
+- type: Ordering
+  question: "Arrange the steps to implement a push operation on an array-based stack:"
+  items:
+    - "Check if the stack is full"
+    - "Add element to the top index"
+    - "Throw error if stack is full"
+    - "Increment the top index"
+    - "Return success"
+  correctOrder:
+    - "Check if the stack is full"
+    - "Throw error if stack is full"
+    - "Add element to the top index"
+    - "Increment the top index"
+    - "Return success"
+  explanation: "1. Check if the stack is full (top index at capacity). 2. Throw an error if full. 3. Place the element at the top index. 4. Increment the top index to point to the next free slot. 5. Indicate success."
+
+- type: MultipleSelect
+  question: "Which of the following are true about implementing a queue using two stacks? (Select all that apply)"
+  choices:
+    - "Enqueue pushes to one stack"
+    - "Dequeue pops from the same stack as enqueue"
+    - "Dequeue may transfer elements between stacks"
+    - "Dequeue has amortized O(1) time"
+  correctAnswers: ["A", "C", "D"]
+  explanation: "Option A is true: Enqueue pushes to an input stack. Option C is true: Dequeue may pop from an output stack, transferring elements from the input stack if the output stack is empty. Option D is true: Dequeue is amortized O(1) due to infrequent transfers. Option B is false: Dequeue uses a separate output stack."
+
+- type: MultipleChoice
+  question: "Consider a stack with elements pushed in order: 1, 2, 3 (1 at bottom, 3 at top). After two pop operations, what is the top element?"
+  choices:
+    - "1"
+    - "2"
+    - "3"
+    - "None (stack empty)"
+  correctAnswer: "A"
+  explanation: "The stack is 1 (bottom), 2, 3 (top). Pop removes 3, then 2. The top element is now 1. The stack is not empty, so option D is incorrect."
+
+- type: TrueFalse
+  question: "An array-based stack requires resizing when it becomes full, similar to a dynamic array."
+  correctAnswer: "A"
+  explanation: "True. A fixed-size array-based stack throws an error when full, but a dynamic array implementation resizes (e.g., doubles) when full, copying elements to a larger array, like a dynamic array."
+
+- type: MultipleChoice
+  question: "What is the worst-case time complexity of enqueue in a linked list-based queue with head and tail pointers?"
+  choices:
+    - "O(1)"
+    - "O(n)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "A"
+  explanation: "Enqueue in a linked list queue with a tail pointer adds a node at the tail in O(1) time by updating the tail’s next pointer and the tail itself. No traversal is needed."
+
+- type: MultipleSelect
+  question: "Which of the following are advantages of a linked list-based stack over an array-based stack? (Select all that apply)"
+  choices:
+    - "No need to resize"
+    - "Constant-time push and pop"
+    - "Better memory locality"
+    - "Dynamic size allocation"
+  correctAnswers: ["A", "B", "D"]
+  explanation: "Option A is true: Linked lists don’t require resizing. Option B is true: Push and pop are O(1) at the head. Option D is true: Linked lists grow dynamically. Option C is false: Arrays have better memory locality due to contiguous storage."
+
+- type: FillInTheBlank
+  question: "The operation that removes an element from the front of a queue is called _______."
+  correctAnswer: "Dequeue"
+  explanation: "Dequeue removes and returns the front element of a queue, following the FIFO principle. The corresponding operation to add an element to the rear is enqueue."
+
+- type: MultipleChoice
+  question: "In a queue implemented with two stacks, what is the amortized time complexity of enqueue?"
+  choices:
+    - "O(1)"
+    - "O(n)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "A"
+  explanation: "Enqueue in a two-stack queue pushes an element onto the input stack, which is O(1). While dequeue may involve O(n) transfers, enqueue itself is always constant time, and amortized analysis spreads transfer costs, supporting O(1) for enqueue."
+
+- type: Matching
+  question: "Match the stack/queue implementation with its characteristic:"
+  leftItems:
+    - "Array-based Stack"
+    - "Linked List Stack"
+    - "Array-based Queue"
+    - "Two Stacks Queue"
+  rightItems:
+    - "Uses head pointer for push/pop"
+    - "May require resizing or circular buffer"
+    - "Fixed capacity unless resized"
+    - "Dequeue may transfer elements"
+  correctMatches:
+    Array-based Stack: "Fixed capacity unless resized"
+    Linked List Stack: "Uses head pointer for push/pop"
+    Array-based Queue: "May require resizing or circular buffer"
+    Two Stacks Queue: "Dequeue may transfer elements"
+  explanation: "Array stacks have fixed size unless dynamic. Linked list stacks use a head pointer. Array queues may use circular buffers to reuse space. Two-stack queues transfer elements for dequeue."
+
+- type: TrueFalse
+  question: "Implementing a queue with two stacks requires both stacks to be the same size."
+  correctAnswer: "B"
+  explanation: "False. In a two-stack queue, one stack handles enqueue (input) and the other dequeue (output). Their sizes vary dynamically based on operations, with no requirement for equal size."
+
+- type: Ordering
+  question: "Arrange the steps to dequeue from a queue implemented with two stacks:"
+  items:
+    - "Pop element from output stack"
+    - "Transfer all elements from input stack to output stack"
+    - "Return the popped element"
+    - "Check if output stack is empty"
+    - "Throw error if both stacks are empty"
+  correctOrder:
+    - "Check if output stack is empty"
+    - "Throw error if both stacks are empty"
+    - "Transfer all elements from input stack to output stack"
+    - "Pop element from output stack"
+    - "Return the popped element"
+  explanation: "1. Check if the output stack is empty. 2. If both stacks are empty, throw an error. 3. If output is empty but input isn’t, transfer all elements from input to output stack (reversing order). 4. Pop the top element from output. 5. Return it."
+  

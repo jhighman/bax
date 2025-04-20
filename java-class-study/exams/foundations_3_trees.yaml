@@ -1,0 +1,119 @@
+- type: MultipleChoice
+  question: "Which traversal of a binary tree visits the root node before its left and right subtrees?"
+  choices:
+    - "Inorder"
+    - "Preorder"
+    - "Postorder"
+    - "Level-order"
+  correctAnswer: "B"
+  explanation: "Preorder traversal visits the root node first, then the left subtree, and finally the right subtree. Inorder visits left, root, right; postorder visits left, right, root; and level-order visits nodes level by level."
+
+- type: TrueFalse
+  question: "In a Binary Search Tree, the left subtree of a node contains values greater than the node’s value."
+  correctAnswer: "B"
+  explanation: "False. In a Binary Search Tree (BST), the left subtree contains values less than or equal to the node’s value, while the right subtree contains values greater than the node’s value."
+
+- type: FillInTheBlank
+  question: "The _______ traversal of a binary tree produces a sorted sequence of values for a Binary Search Tree."
+  correctAnswer: "Inorder"
+  explanation: "Inorder traversal (left, root, right) visits nodes in ascending order in a Binary Search Tree, as it processes the left subtree (smaller values), the root, and then the right subtree (larger values)."
+
+- type: Matching
+  question: "Match the AVL tree rotation with the condition it corrects:"
+  leftItems:
+    - "LL Rotation"
+    - "RR Rotation"
+    - "LR Rotation"
+    - "RL Rotation"
+  rightItems:
+    - "Imbalance due to heavy right subtree of right child"
+    - "Imbalance due to heavy left subtree of left child"
+    - "Imbalance due to heavy right subtree of left child"
+    - "Imbalance due to heavy left subtree of right child"
+  correctMatches:
+    LL Rotation: "Imbalance due to heavy left subtree of left child"
+    RR Rotation: "Imbalance due to heavy right subtree of right child"
+    LR Rotation: "Imbalance due to heavy right subtree of left child"
+    RL Rotation: "Imbalance due to heavy left subtree of right child"
+  explanation: "LL and RR rotations fix single imbalances (left-left, right-right). LR and RL are double rotations addressing imbalances where the opposite subtree of a child is heavy (left-right, right-left)."
+
+- type: Ordering
+  question: "Arrange the steps to perform a left rotation on an AVL tree node to fix an RR imbalance:"
+  items:
+    - "Update root’s right to y’s left"
+    - "Identify right child as y"
+    - "Set y’s left to root"
+    - "Update heights of root and y"
+    - "Return y as new root"
+  correctOrder:
+    - "Identify right child as y"
+    - "Update root’s right to y’s left"
+    - "Set y’s left to root"
+    - "Update heights of root and y"
+    - "Return y as new root"
+  explanation: "For a left rotation (RR): 1. Identify the right child as y. 2. Set root’s right pointer to y’s left subtree. 3. Set y’s left pointer to the root. 4. Update the heights of root and y. 5. Return y as the new root."
+
+- type: MultipleSelect
+  question: "Which of the following are true about node insertion in a Binary Search Tree? (Select all that apply)"
+  choices:
+    - "New nodes are always inserted as leaves"
+    - "Insertion requires updating balance factors"
+    - "Insertion compares the new value with existing nodes"
+    - "Insertion takes O(log n) time in all cases"
+  correctAnswers: ["A", "C"]
+  explanation: "Option A is true: New nodes are inserted as leaves in a BST. Option C is true: Insertion involves comparing the new value to navigate to the correct position. Option B is false: Balance factors are updated in AVL trees, not basic BSTs. Option D is false: Insertion can take O(n) in a skewed BST."
+
+- type: MultipleChoice
+  question: "Consider a Binary Search Tree with root value 50, left child 30 (with left 20, right 40), and right child 70. What is the preorder traversal sequence?"
+  choices:
+    - "50 30 20 40 70"
+    - "20 30 40 50 70"
+    - "70 50 40 30 20"
+    - "30 20 40 50 70"
+  correctAnswer: "A"
+  explanation: "Preorder traversal visits root, left, right. Starting at 50, it visits 50, then left subtree (30, 20, 40), then right subtree (70), giving 50 30 20 40 70."
+
+- type: TrueFalse
+  question: "An AVL tree ensures that the height difference between left and right subtrees of any node is at most 1."
+  correctAnswer: "A"
+  explanation: "True. An AVL tree is a self-balancing BST where the balance factor (height of left subtree minus height of right subtree) of every node is -1, 0, or 1, ensuring O(log n) operations."
+
+- type: MultipleChoice
+  question: "In an AVL tree, inserting a new value causes the left subtree of the left child to become too heavy. Which rotation corrects this?"
+  choices:
+    - "LL Rotation"
+    - "RR Rotation"
+    - "LR Rotation"
+    - "RL Rotation"
+  correctAnswer: "A"
+  explanation: "An LL imbalance occurs when the left subtree of the left child is too heavy. A single right rotation on the unbalanced node corrects this by promoting the left child to the root."
+
+- type: MultipleSelect
+  question: "Which of the following are true about AVL tree rotations? (Select all that apply)"
+  choices:
+    - "They maintain the Binary Search Tree property"
+    - "They only occur during node insertions"
+    - "They involve re-linking left and right subtrees"
+    - "They always reduce the tree’s height"
+  correctAnswers: ["A", "C"]
+  explanation: "Option A is true: Rotations preserve BST ordering (smaller values left, larger right). Option C is true: Rotations re-link subtrees (e.g., adjusting left/right pointers). Option B is false: Rotations occur for insertions and deletions. Option D is false: Rotations balance the tree but don’t always reduce height."
+
+- type: FillInTheBlank
+  question: "In an AVL tree, a node with a balance factor of +2 indicates the _______ subtree is too heavy."
+  correctAnswer: "Left"
+  explanation: "A balance factor of +2 means the left subtree’s height exceeds the right subtree’s by 2, indicating the left subtree is too heavy and requires rotation(s) to balance."
+
+- type: MultipleChoice
+  question: "What is the worst-case time complexity of searching for a value in a balanced AVL tree with n nodes?"
+  choices:
+    - "O(1)"
+    - "O(n)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "C"
+  explanation: "In a balanced AVL tree, the height is O(log n) due to balancing. Searching follows a path from root to leaf, taking O(log n) time in the worst case."
+
+- type: Matching
+  question: "Match the binary tree traversal with its visiting order:"
+  leftItems:
+    - "Preorder"

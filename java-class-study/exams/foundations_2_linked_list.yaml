@@ -1,0 +1,211 @@
+- type: MultipleChoice
+  question: "What does the following code do when inserting a node at the head of a singly linked list?"
+  code: |
+    struct Node {
+        int data;
+        struct Node* next;
+    };
+    void insertHead(struct Node** head, int value) {
+        struct Node* newNode = malloc(sizeof(struct Node));
+        newNode->data = value;
+        newNode->next = *head;
+        *head = newNode;
+    }
+  choices:
+    - "Inserts a node at the tail"
+    - "Inserts a node at the head"
+    - "Reverses the list"
+    - "Deletes the head node"
+  correctAnswer: "B"
+  explanation: "The function allocates a new node, sets its data to `value`, points its `next` to the current head, and updates the head to the new node. This inserts the node at the head of the list."
+
+- type: TrueFalse
+  question: "In a singly linked list, the `->` operator is used to access fields of a struct when you have a pointer to it."
+  correctAnswer: "A"
+  explanation: "True. The `->` operator is used for pointers to structs (e.g., `node->data` accesses `data` if `node` is a `struct Node*`). The `.` operator is used for non-pointer structs (e.g., `node.data` if `node` is a `struct Node`)."
+
+- type: FillInTheBlank
+  question: "The _______ function is used to dynamically allocate memory for a new node in a linked list."
+  correctAnswer: "malloc"
+  explanation: "`malloc` allocates memory for a new node (e.g., `struct Node* newNode = malloc(sizeof(struct Node));`). It returns a `void*` pointer, which is cast to the appropriate type, and must be freed later to avoid memory leaks."
+
+- type: Matching
+  question: "Match the linked list operation with its description:"
+  leftItems:
+    - "Insert at Head"
+    - "Insert at Tail"
+    - "Delete Node"
+    - "Reverse List"
+  rightItems:
+    - "Adds a node at the end of the list"
+    - "Adds a node at the start of the list"
+    - "Removes a node with a specific value"
+    - "Reorders nodes to reverse the list"
+  correctMatches:
+    Insert at Head: "Adds a node at the start of the list"
+    Insert at Tail: "Adds a node at the end of the list"
+    Delete Node: "Removes a node with a specific value"
+    Reverse List: "Reorders nodes to reverse the list"
+  explanation: "Insert at Head updates the head pointer. Insert at Tail traverses to the end. Delete Node adjusts pointers to skip a node. Reverse List re-links nodes in opposite order."
+
+- type: Ordering
+  question: "Arrange the steps to iteratively reverse a singly linked list:"
+  items:
+    - "Set current to head"
+    - "Update head to last node"
+    - "Set next to current’s next"
+    - "Set current’s next to previous"
+    - "Move previous to current, current to next"
+  correctOrder:
+    - "Set current to head"
+    - "Set next to current’s next"
+    - "Set current’s next to previous"
+    - "Move previous to current, current to next"
+    - "Update head to last node"
+  explanation: "To reverse iteratively: 1. Start with `current = head`, `previous = NULL`. 2. Save `next = current->next`. 3. Set `current->next = previous`. 4. Move `previous = current`, `current = next`. 5. After the loop, set `head = previous`."
+
+- type: MultipleSelect
+  question: "Which of the following are true about deleting a node from a singly linked list? (Select all that apply)"
+  choices:
+    - "You must update the previous node’s next pointer"
+    - "You can delete the head node without traversing the list"
+    - "Deleting the last node requires traversing the entire list"
+    - "Deleting a node always takes O(1) time"
+  correctAnswers: ["A", "B", "C"]
+  explanation: "Option A is true: Deleting requires updating the previous node’s `next`. Option B is true: Head deletion is O(1) by updating `head`. Option C is true: Last node deletion needs traversal to find the second-to-last node. Option D is false: Deletion can take O(n) if the node isn’t at the head."
+
+- type: MultipleChoice
+  question: "What is the output of the following code after reversing a linked list?"
+  code: |
+    #include <stdio.h>
+    #include <stdlib.h>
+    struct Node {
+        int data;
+        struct Node* next;
+    };
+    void printList(struct Node* head) {
+        while (head) {
+            printf("%d ", head->data);
+            head = head->next;
+        }
+    }
+    int main() {
+        struct Node* head = NULL;
+        struct Node* n1 = malloc(sizeof(struct Node));
+        struct Node* n2 = malloc(sizeof(struct Node));
+        struct Node* n3 = malloc(sizeof(struct Node));
+        n1->data = 1; n1->next = n2;
+        n2->data = 2; n2->next = n3;
+        n3->data = 3; n3->next = NULL;
+        head = n1;
+        // Reverse list
+        struct Node *prev = NULL, *current = head, *next;
+        while (current) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+        printList(head);
+        return 0;
+    }
+  choices:
+    - "1 2 3"
+    - "3 2 1"
+    - "Compilation error"
+    - "No output"
+  correctAnswer: "B"
+  explanation: "The code reverses a list with nodes 1->2->3. After reversal, it becomes 3->2->1. The `printList` function outputs `3 2 1`."
+
+- type: TrueFalse
+  question: "A recursive solution to reverse a linked list uses O(n) extra space due to the call stack."
+  correctAnswer: "A"
+  explanation: "True. A recursive reversal calls itself for each node, storing O(n) frames on the call stack. An iterative reversal uses O(1) extra space with three pointers."
+
+- type: MultipleChoice
+  question: "Which of the following correctly merges two sorted linked lists?"
+  code: |
+    struct Node {
+        int data;
+        struct Node* next;
+    };
+    struct Node* mergeLists(struct Node* list1, struct Node* list2) {
+        if (!list1) return list2;
+        if (!list2) return list1;
+        struct Node* result;
+        if (list1->data <= list2->data) {
+            result = list1;
+            result->next = mergeLists(list1->next, list2);
+        } else {
+            result = list2;
+            result->next = mergeLists(list1, list2->next);
+        }
+        return result;
+    }
+  choices:
+    - "Iterative merge"
+    - "Recursive merge"
+    - "Reverse merge"
+    - "Compilation error"
+  correctAnswer: "B"
+  explanation: "The function recursively merges two sorted lists by comparing head nodes and linking the smaller one to the merged result of the remaining nodes. It’s a recursive solution."
+
+- type: MultipleSelect
+  question: "Which of the following are potential issues when manipulating linked list pointers? (Select all that apply)"
+  choices:
+    - "Forgetting to update the head pointer"
+    - "Not checking for NULL pointers"
+    - "Using `.` instead of `->` for pointers"
+    - "Always using recursive solutions"
+  correctAnswers: ["A", "B", "C"]
+  explanation: "Option A is true: Failing to update `head` can break the list. Option B is true: Not checking `NULL` causes crashes. Option C is true: Using `.` instead of `->` for pointers causes compilation errors. Option D is false: Recursion is valid, though it may use more space."
+
+- type: FillInTheBlank
+  question: "The _______ operator is used to access the next pointer of a linked list node."
+  correctAnswer: "->"
+  explanation: "The `->` operator accesses fields of a struct through a pointer (e.g., `node->next` gets the `next` pointer of a `struct Node*`). It’s used for linked list navigation."
+
+- type: MultipleChoice
+  question: "What is the time complexity of inserting a node at the tail of a singly linked list?"
+  choices:
+    - "O(1)"
+    - "O(n)"
+    - "O(log n)"
+    - "O(n log n)"
+  correctAnswer: "B"
+  explanation: "Inserting at the tail requires traversing the list to find the last node, which takes O(n) time. Inserting at the head is O(1)."
+
+- type: Matching
+  question: "Match the linked list reversal approach with its characteristic:"
+  leftItems:
+    - "Iterative Reversal"
+    - "Recursive Reversal"
+  rightItems:
+    - "Uses O(1) extra space"
+    - "Uses O(n) stack space"
+  correctMatches:
+    Iterative Reversal: "Uses O(1) extra space"
+    Recursive Reversal: "Uses O(n) stack space"
+  explanation: "Iterative reversal uses three pointers (previous, current, next) with O(1) space. Recursive reversal uses O(n) space due to the call stack for each node."
+
+- type: TrueFalse
+  question: "Deleting a node from a singly linked list always requires the previous node’s pointer."
+  correctAnswer: "B"
+  explanation: "False. Deleting the head node only requires updating `head` to `head->next`, which is O(1) without needing the previous node. Other nodes require the previous node’s pointer to adjust `next`, found via traversal."
+
+- type: Ordering
+  question: "Arrange the steps to insert a node at the tail of a singly linked list:"
+  items:
+    - "Allocate memory for new node"
+    - "Set new node’s next to NULL"
+    - "Traverse to the last node"
+    - "Set last node’s next to new node"
+    - "Set new node’s data"
+  correctOrder:
+    - "Allocate memory for new node"
+    - "Set new node’s data"
+    - "Set new node’s next to NULL"
+    - "Traverse to the last node"
+    - "Set last node’s next to new node"
+  explanation: "1. Allocate: `newNode = malloc(sizeof(struct Node))`. 2. Set data: `newNode->data = value`. 3. Set `newNode->next = NULL`. 4. Traverse to the last node (where `node->next == NULL`). 5. Link: `node->next = newNode`."

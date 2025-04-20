@@ -1,0 +1,164 @@
+- type: MultipleChoice
+  question: "What does the asterisk (*) symbol indicate in a pointer declaration in C?"
+  choices:
+    - "It declares a reference variable."
+    - "It declares a pointer variable."
+    - "It multiplies the declared variable by some constant value."
+    - "It is only used for array declarations."
+  correctAnswer: "B"
+  explanation: "In C, the asterisk (*) in a variable declaration indicates that the variable is a pointer to a certain data type. For example, `int *p;` declares a pointer `p` that can store the address of an `int`. Option A is incorrect as C does not have reference types like C++. Option C applies to multiplication in expressions, not declarations. Option D is wrong as arrays use `[]`, and `*` is not exclusive to arrays."
+
+- type: TrueFalse
+  question: "In C, the name of an array (e.g., arr) can be used as a pointer to its first element."
+  correctAnswer: "A"
+  explanation: "True. In C, using `arr` (the name of the array) in most expressions gives the address of the first element (`&arr[0]`). However, while an array name behaves like a pointer to the first element in expressions, it is not a modifiable lvalue (you cannot change `arr` to point elsewhere), unlike a pointer variable which can be reassigned."
+
+- type: FillInTheBlank
+  question: "Fill in the blank to allocate memory for an array of 10 integers in C: int *p = ______(10 * sizeof(int));"
+  correctAnswer: "malloc"
+  explanation: "The standard library function `malloc()` dynamically allocates the requested memory in bytes and returns a pointer to the allocated space. For an array of 10 integers, you need `10 * sizeof(int)` bytes. The correct statement is: `int *p = malloc(10 * sizeof(int));`. Remember to check the return value of `malloc()` in real programs and to `free(p)` when done."
+
+- type: Matching
+  question: "Match the pointer concept with its description in C:"
+  leftItems:
+    - "Pointer Arithmetic"
+    - "NULL Pointer"
+    - "Dangling Pointer"
+    - "Void Pointer"
+  rightItems:
+    - "A pointer that doesn't point to valid memory anymore (freed or out of scope)"
+    - "A pointer with no associated data type"
+    - "When a pointer has a value of zero and does not point to any object"
+    - "Incrementing a pointer to move to the next element of an array"
+  correctMatches:
+    Pointer Arithmetic: "Incrementing a pointer to move to the next element of an array"
+    NULL Pointer: "When a pointer has a value of zero and does not point to any object"
+    Dangling Pointer: "A pointer that doesn't point to valid memory anymore (freed or out of scope)"
+    Void Pointer: "A pointer with no associated data type"
+  explanation: "Pointer Arithmetic scales by the size of the pointed-to type (e.g., incrementing an `int*` moves to the next integer). A NULL Pointer is set to zero and points to no valid memory. A Dangling Pointer references deallocated memory (e.g., after `free()`). A Void Pointer (`void*`) can hold any data type’s address but must be cast before dereferencing."
+
+- type: Ordering
+  question: "Arrange the steps to dynamically allocate and free an array of pointers to char in C."
+  items:
+    - "Use the pointer in the program (e.g., store strings)"
+    - "Include <stdlib.h>"
+    - "Call free() on each allocated string pointer"
+    - "Declare a pointer to pointer: char **p"
+    - "Allocate memory for the array of pointers using malloc()"
+    - "Call free() on the array of pointers"
+  correctOrder:
+    - "Include <stdlib.h>"
+    - "Declare a pointer to pointer: char **p"
+    - "Allocate memory for the array of pointers using malloc()"
+    - "Use the pointer in the program (e.g., store strings)"
+    - "Call free() on each allocated string pointer"
+    - "Call free() on the array of pointers"
+  explanation: "1. Include `<stdlib.h>` for `malloc()` and `free()`. 2. Declare `char **p;` as a pointer to pointers. 3. Allocate memory: `p = malloc(n * sizeof(char *));`. 4. Use `p` to store strings (e.g., `p[i] = malloc(...)`). 5. Free each string: `for(...) { free(p[i]); }`. 6. Free the array: `free(p);`."
+
+- type: MultipleSelect
+  question: "Which of the proceeds following statements about pointer arithmetic in C are correct? (Select all that apply)"
+  choices:
+    - "Incrementing a pointer moves it by one byte in memory"
+    - "Pointer arithmetic is scaled by the size of the pointed-to data type"
+    - "Adding 1 to an int* moves to the next integer, not just the next byte"
+    - "It is valid to perform pointer arithmetic on void* without casting"
+  correctAnswers: ["B", "C"]
+  explanation: "Option A is false: Incrementing a pointer scales by the type’s size, not 1 byte (except for `char*`). Option B is true: Pointer arithmetic accounts for type size. Option C is true: Adding 1 to an `int*` moves to the next `int`. Option D is false: Arithmetic on `void*` requires casting, as `void` has no defined size."
+
+- type: MultipleChoice
+  question: "What is the output of the following C code?"
+  code: |
+    #include <stdio.h>
+    int main() {
+        int arr[3] = {10, 20, 30};
+        int *p = arr;
+        printf("%d\n", *p);
+        p++;
+        printf("%d\n", *p);
+        return 0;
+    }
+  choices:
+    - "10\n20"
+    - "20\n30"
+    - "Compilation error"
+    - "10\n30"
+  correctAnswer: "A"
+  explanation: "The pointer `p` is initialized to `arr`, pointing to `arr[0]` (10). The first `printf` outputs 10. After `p++`, `p` points to `arr[1]` (20), so the second `printf` outputs 20. The output is:\n10\n20"
+
+- type: TrueFalse
+  question: "A memory leak occurs when dynamically allocated memory is not freed before losing its reference."
+  correctAnswer: "A"
+  explanation: "True. A memory leak happens if memory allocated with `malloc()`, `calloc()`, or `realloc()` is not freed before the pointer is overwritten or goes out of scope, making the memory inaccessible and unusable."
+
+- type: MultipleChoice
+  question: "Which of the following best describes a dangling pointer in C?"
+  choices:
+    - "A pointer that points to NULL"
+    - "A pointer to a deallocated or otherwise invalid memory location"
+    - "A pointer used with pointer arithmetic"
+    - "A pointer declared with the wrong type"
+  correctAnswer: "B"
+  explanation: "A dangling pointer references memory that is no longer valid (e.g., after `free()` or scope exit). Option A is incorrect as `NULL` pointers are safe. Option C describes pointer arithmetic, not dangling pointers. Option D may cause errors but isn’t the definition of dangling."
+
+- type: MultipleChoice
+  question: "What is the output of the following code if int is 4 bytes?"
+  code: |
+    int arr[] = {10, 20, 30, 40};
+    int *p = arr;
+    printf("%d\n", *(p + 2));
+  choices:
+    - "10"
+    - "20"
+    - "30"
+    - "40"
+  correctAnswer: "C"
+  explanation: "The pointer `p` points to the start of `arr`. The expression `*(p + 2)` accesses `arr[2]` (30). Pointer arithmetic scales by the size of `int` (4 bytes), so `p + 2` moves 8 bytes to the third element."
+
+- type: MultipleSelect
+  question: "Which of the following practices help prevent memory-related errors? (Select all that apply)"
+  choices:
+    - "Checking for NULL after malloc"
+    - "Setting a freed pointer to NULL"
+    - "Using uninitialized pointers"
+    - "Freeing memory multiple times"
+  correctAnswers: ["A", "B"]
+  explanation: "Checking for `NULL` after `malloc` prevents dereferencing invalid memory. Setting a freed pointer to `NULL` avoids accidental reuse. Using uninitialized pointers or freeing memory multiple times causes undefined behavior."
+
+- type: Matching
+  question: "Match the memory allocation function with its primary characteristic:"
+  leftItems:
+    - "malloc"
+    - "calloc"
+    - "realloc"
+    - "free"
+  rightItems:
+    - "Allocates uninitialized memory"
+    - "Allocates and zeros memory"
+    - "Resizes previously allocated memory"
+    - "Releases allocated memory"
+  correctMatches:
+    malloc: "Allocates uninitialized memory"
+    calloc: "Allocates and zeros memory"
+    realloc: "Resizes previously allocated memory"
+    free: "Releases allocated memory"
+  explanation: "Each function serves a distinct purpose: `malloc` for basic allocation, `calloc` for zeroed memory, `realloc` for resizing, and `free` for deallocation to prevent memory leaks."
+
+- type: TrueFalse
+  question: "Variables allocated on the heap are automatically deallocated when a function returns."
+  correctAnswer: "B"
+  explanation: "False. Heap memory (allocated with `malloc`, `calloc`, or `realloc`) persists until explicitly freed with `free`. Stack variables are automatically deallocated when their scope ends, but heap memory requires manual management."
+
+- type: MultipleChoice
+  question: "Which function should be used to safely resize a dynamically allocated array?"
+  choices:
+    - "malloc"
+    - "calloc"
+    - "realloc"
+    - "free"
+  correctAnswer: "C"
+  explanation: "`realloc` resizes a previously allocated memory block, preserving existing data (if possible) and returning a new pointer. `malloc` and `calloc` allocate new memory, while `free` deallocates without resizing."
+
+- type: FillInTheBlank
+  question: "The _______ memory stores local variables and function call information, automatically managed by the program."
+  correctAnswer: "Stack"
+  explanation: "The stack stores local variables, function parameters, and call frames. It is automatically managed, with memory allocated and freed as functions are called and return, unlike the heap which requires manual management."

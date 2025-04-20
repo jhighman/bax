@@ -1,0 +1,139 @@
+- type: MultipleChoice
+  question: "What is polymorphism in Java?"
+  choices:
+    - "A feature that allows a class to have multiple constructors"
+    - "The ability of an object to take many forms and be referenced by its parent class"
+    - "A way to hide implementation details of a class"
+    - "The process of creating multiple instances of a class"
+  correctAnswer: "B"
+  explanation: "Polymorphism is a core OOP concept that allows an object to be referenced by its parent class type while maintaining its own specific implementation. This enables flexible and extensible code design."
+
+- type: TrueFalse
+  question: "Method overloading is an example of compile-time (static) polymorphism."
+  correctAnswer: "A"
+  explanation: "Method overloading, where multiple methods have the same name but different parameters, is resolved at compile time, making it static polymorphism. The compiler determines which method to call based on the method signature."
+
+- type: MultipleChoice
+  question: "Which of the following is an example of runtime (dynamic) polymorphism?"
+  choices:
+    - "Method overloading in a class"
+    - "Constructor overloading in a class"
+    - "Method overriding in a child class"
+    - "Static method implementation"
+  correctAnswer: "C"
+  explanation: "Method overriding is a classic example of runtime polymorphism, where the specific method implementation is determined at runtime based on the actual object type, not the reference type."
+
+- type: MultipleSelect
+  question: "Which statements about polymorphism in Java are true? (Select all that apply)"
+  choices:
+    - "Private methods can be overridden"
+    - "A child class can override parent class methods"
+    - "Static methods can demonstrate runtime polymorphism"
+    - "Method overriding requires the same return type or covariant return types"
+  correctAnswers: ["B", "D"]
+  explanation: "Private methods cannot be overridden as they are not visible to child classes. Static methods cannot demonstrate runtime polymorphism as they belong to the class, not instances. Child classes can override parent methods, and overridden methods must have the same return type or a covariant return type."
+
+- type: FillInTheBlank
+  question: "The ability of a reference variable of a superclass to hold an object of its subclass is called _______ polymorphism."
+  correctAnswer: "runtime"
+  explanation: "Runtime polymorphism, also known as dynamic polymorphism, allows a parent class reference to hold a child class object, with method calls resolved at runtime based on the actual object type."
+
+- type: MultipleChoice
+  question: "What happens when a child class defines a method with the same name and signature as a parent class method?"
+  choices:
+    - "The code won't compile"
+    - "The parent class method is hidden"
+    - "The child class method overrides the parent method"
+    - "Both methods are available through different references"
+  correctAnswer: "C"
+  explanation: "When a child class defines a method with the same signature as a parent class method, it overrides the parent method. This is method overriding, a key aspect of runtime polymorphism."
+
+- type: Ordering
+  question: "Order the following steps in the process of method resolution in runtime polymorphism:"
+  items:
+    - "Reference variable is created of superclass type"
+    - "Object of subclass is created"
+    - "Method is called on reference variable"
+    - "JVM determines actual object type"
+    - "Appropriate method implementation is executed"
+  correctOrder:
+    - "Reference variable is created of superclass type"
+    - "Object of subclass is created"
+    - "Method is called on reference variable"
+    - "JVM determines actual object type"
+    - "Appropriate method implementation is executed"
+  explanation: "This is the sequence of events in runtime polymorphism, from creating a reference to executing the appropriate method implementation."
+
+- type: MultipleChoice
+  question: "Which annotation is recommended when overriding a method in Java?"
+  choices:
+    - "@Override"
+    - "@Polymorphic"
+    - "@Overridden"
+    - "@MethodOverride"
+  correctAnswer: "A"
+  explanation: "The @Override annotation is used to indicate that a method is intended to override a method in a parent class. It helps catch errors if the method signature doesn't match the parent class method."
+
+- type: TrueFalse
+  question: "A final method can be overridden in a child class to demonstrate polymorphism."
+  correctAnswer: "B"
+  explanation: "Final methods cannot be overridden. The final keyword prevents method overriding, which means the method implementation cannot be changed in child classes."
+
+- type: MultipleSelect
+  question: "Which of the following support polymorphic behavior in Java? (Select all that apply)"
+  choices:
+    - "Interfaces"
+    - "Abstract classes"
+    - "Final classes"
+    - "Concrete classes"
+  correctAnswers: ["A", "B", "D"]
+  explanation: "Interfaces, abstract classes, and concrete classes can all be used to implement polymorphism. Final classes, while they can implement interfaces and extend classes, cannot be extended themselves."
+
+- type: Matching
+  question: "Match the polymorphism concepts with their descriptions:"
+  leftItems:
+    - "Static Polymorphism"
+    - "Dynamic Polymorphism"
+    - "Covariant Return Type"
+    - "Method Hiding"
+  rightItems:
+    - "Resolved at compile time"
+    - "Resolved at runtime"
+    - "Overridden method returns subclass type"
+    - "Static method redefinition in subclass"
+  correctMatches:
+    "Static Polymorphism": "Resolved at compile time"
+    "Dynamic Polymorphism": "Resolved at runtime"
+    "Covariant Return Type": "Overridden method returns subclass type"
+    "Method Hiding": "Static method redefinition in subclass"
+  explanation: "These are fundamental concepts in Java polymorphism, each serving a different purpose in object-oriented design."
+
+- type: MultipleChoice
+  question: "What is the output of the following code?\nclass Animal { void sound() { System.out.println(\"Animal\"); } }\nclass Dog extends Animal { void sound() { System.out.println(\"Bark\"); } }\nAnimal a = new Dog();\na.sound();"
+  choices:
+    - "Animal"
+    - "Bark"
+    - "Compilation error"
+    - "Runtime error"
+  correctAnswer: "B"
+  explanation: "This is an example of runtime polymorphism. Although the reference is of type Animal, the actual object is Dog, so Dog's sound() method is called, printing 'Bark'."
+
+- type: FillInTheBlank
+  question: "In Java, the process of automatically converting a primitive data type to its corresponding wrapper class is called _______ polymorphism."
+  correctAnswer: "autoboxing"
+  explanation: "Autoboxing is a form of polymorphism where Java automatically converts primitive types to their wrapper classes (e.g., int to Integer). This is handled implicitly by the compiler."
+
+- type: MultipleChoice
+  question: "Which of the following is NOT a valid way to achieve polymorphism in Java?"
+  choices:
+    - "Interface implementation"
+    - "Abstract class inheritance"
+    - "Private method overriding"
+    - "Method overloading"
+  correctAnswer: "C"
+  explanation: "Private methods cannot be overridden because they are not visible to child classes. The other options are valid ways to achieve polymorphism in Java."
+
+- type: TrueFalse
+  question: "The 'instanceof' operator can be used to determine the runtime type of an object in polymorphic references."
+  correctAnswer: "A"
+  explanation: "The instanceof operator is used to test whether an object is an instance of a specific type. It's particularly useful when working with polymorphic references to determine the actual type of an object at runtime." 
