@@ -3,6 +3,7 @@ package com.highman.exams;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  * Represents a matching question where users match items from two lists.
@@ -11,11 +12,14 @@ public class MatchingQuestion extends Question {
     private List<String> leftItems;
     private List<String> rightItems;
     private Map<String, String> correctMatches;
+    private Map<String, String> pairs;
 
     public MatchingQuestion() {
         super();
         this.leftItems = new ArrayList<>();
         this.rightItems = new ArrayList<>();
+        this.pairs = new LinkedHashMap<>();
+        this.correctMatches = new LinkedHashMap<>();
     }
 
     public MatchingQuestion(String questionText, List<String> leftItems, List<String> rightItems, Map<String, String> correctMatches, String explanation) {
@@ -23,22 +27,38 @@ public class MatchingQuestion extends Question {
         this.leftItems = new ArrayList<>(leftItems);
         this.rightItems = new ArrayList<>(rightItems);
         this.correctMatches = correctMatches;
+        this.pairs = new LinkedHashMap<>(correctMatches);
+    }
+
+    public void addPair(String left, String right) {
+        pairs.put(left, right);
+        correctMatches.put(left, right);
     }
 
     @Override
     public String getCorrectAnswer() {
-        return correctMatches.toString();
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, String> entry : correctMatches.entrySet()) {
+            if (sb.length() > 0) sb.append(";");
+            sb.append(entry.getKey()).append("=").append(entry.getValue());
+        }
+        return sb.toString();
     }
 
     @Override
     public void display() {
         System.out.println(questionText);
-        for (int i = 0; i < leftItems.size(); i++) {
-            System.out.println((char)('A' + i) + ") " + leftItems.get(i));
+        System.out.println("\nLeft side:");
+        int i = 1;
+        for (String left : pairs.keySet()) {
+            System.out.println(i + ". " + left);
+            i++;
         }
-        System.out.println("\nMatch with:");
-        for (int i = 0; i < rightItems.size(); i++) {
-            System.out.println((i + 1) + ") " + rightItems.get(i));
+        System.out.println("\nRight side:");
+        i = 1;
+        for (String right : pairs.values()) {
+            System.out.println((char)('A' + i - 1) + ". " + right);
+            i++;
         }
     }
 
@@ -57,6 +77,10 @@ public class MatchingQuestion extends Question {
 
     public Map<String, String> getCorrectMatches() {
         return correctMatches;
+    }
+
+    public Map<String, String> getPairs() {
+        return new LinkedHashMap<>(pairs);
     }
 
     public void setLeftItems(List<String> leftItems) {

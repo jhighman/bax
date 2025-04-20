@@ -26,4 +26,10 @@ public interface ExamComponent {
      * @return The explanation as a String, or null if not applicable.
      */
     String getExplanation();
+
+    /**
+     * Returns the question text for the component (if applicable).
+     * @return The question text as a String, or null if not applicable.
+     */
+    String getQuestionText();
 }

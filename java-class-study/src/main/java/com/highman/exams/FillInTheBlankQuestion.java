@@ -8,16 +8,29 @@ public class FillInTheBlankQuestion extends Question {
 
     public FillInTheBlankQuestion() {
         super();
+        this.correctAnswer = "";
     }
 
     public FillInTheBlankQuestion(String questionText, String correctAnswer, String explanation) {
         super(questionText, explanation);
-        this.correctAnswer = correctAnswer;
+        this.correctAnswer = correctAnswer != null ? correctAnswer.trim() : "";
     }
 
     @Override
     public String getCorrectAnswer() {
-        return correctAnswer;
+        return correctAnswer != null ? correctAnswer : "";
+    }
+
+    /**
+     * Checks if the given answer is correct, ignoring case and extra whitespace.
+     * @param userAnswer The user's answer
+     * @return true if the answer is correct, false otherwise
+     */
+    public boolean isCorrectAnswer(String userAnswer) {
+        if (correctAnswer == null || correctAnswer.trim().isEmpty() || userAnswer == null) {
+            return false;
+        }
+        return correctAnswer.trim().equalsIgnoreCase(userAnswer.trim());
     }
 
     @Override
@@ -32,6 +45,6 @@ public class FillInTheBlankQuestion extends Question {
     }
 
     public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
+        this.correctAnswer = correctAnswer != null ? correctAnswer.trim() : "";
     }
 }

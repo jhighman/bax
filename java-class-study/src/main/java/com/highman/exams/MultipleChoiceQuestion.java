@@ -70,11 +70,11 @@ public class MultipleChoiceQuestion extends Question {
         this.imagePath = imagePath;
     }
 
-    public void setAnswerChoices(List<String> answerChoices) {
-        this.answerChoices = new ArrayList<>(answerChoices);
-    }
-
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
-}
+
+    public void addChoice(String choice) {
+        answerChoices.add(choice);
+    }
+} 

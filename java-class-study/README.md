@@ -11,6 +11,7 @@ Before you begin, make sure you have:
 
 ## Project Structure
 
+### Directory Layout
 ```
 java-class-study/
 ├── src/
@@ -18,11 +19,42 @@ java-class-study/
 │       └── java/
 │           └── com/
 │               └── highman/
-│                   ├── ExamAppSwing.java    # Main GUI application
-│                   ├── ExamReader.java      # Reads exam questions from YAML files
-│                   └── exams/               # Question type implementations
-└── exams/                                   # Directory containing exam YAML files
+│                   ├── ExamAppSwing.java           # Main application class
+│                   ├── ui/                         # User interface components
+│                   │   ├── ExamAppFrame.java       # Main UI frame and layout
+│                   │   ├── QuestionDisplay.java    # Renders questions and answer inputs
+│                   │   ├── ResultDisplay.java      # Shows results and explanations
+│                   │   └── OrderedItemPanel.java   # UI for ordering questions
+│                   ├── logic/                      # Application logic
+│                   │   ├── QuestionLoader.java     # Loads questions from files
+│                   │   ├── QuestionHandler.java    # Processes answers and navigation
+│                   │   └── ExamState.java          # Manages exam state
+│                   └── model/                      # Data models
+│                       ├── ExamResult.java         # Stores question results
+│                       ├── ExamComponent.java      # Interface for questions
+│                       ├── Question.java           # Base question class
+│                       └── ...                     # Question type implementations
+└── exams/                                         # Directory containing exam YAML files
 ```
+
+### Code Organization
+
+The project follows a clear separation of concerns:
+
+1. **UI Layer** (`ui/`):
+   - Handles all user interface components
+   - Manages layout and visual presentation
+   - Handles user interactions
+
+2. **Logic Layer** (`logic/`):
+   - Contains business logic and application flow
+   - Manages exam state and progression
+   - Handles question loading and processing
+
+3. **Model Layer** (`model/`):
+   - Defines data structures and interfaces
+   - Implements question types and result tracking
+   - Provides the foundation for exam components
 
 ## Setting Up Your Development Environment
 
@@ -89,6 +121,19 @@ Exams are stored in YAML files in the `exams` directory. Each exam file contains
 4. **Matching**: Matching items from two lists
 5. **Ordering**: Arranging items in the correct order
 6. **MultipleSelect**: Selecting multiple correct answers
+
+## Development Guidelines
+
+### Adding New Features
+1. Place UI components in the `ui` package
+2. Add business logic to the `logic` package
+3. Define new data models in the `model` package
+
+### Creating New Question Types
+1. Create a new class in the `model` package
+2. Implement the `ExamComponent` interface
+3. Add support in the `QuestionLoader` class
+4. Create corresponding UI components if needed
 
 ## Troubleshooting
 

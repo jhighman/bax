@@ -1,0 +1,93 @@
+questions:
+  # Question 7: Code Question
+  - type: Code
+    question: "What is the output of the following C code?"
+    codeBlock: |
+      #include <stdio.h>
+      int main() {
+          int x = 3;
+          printf("%d", x * x + 2);
+          return 0;
+      }
+    correctAnswer: "11"
+    explanation: "The code computes 3 * 3 + 2 = 9 + 2 = 11 and prints it."
+    imagePath: "diagrams/code_output.png"  # Optional image for testing
+
+  # Question 8: Code Completion Question
+  - type: CodeCompletion
+    question: "Complete the recursive function to sum values at a given depth in a binary tree."
+    codeBlock: |
+      typedef struct node {
+          int data;
+          struct node *left;
+          struct node *right;
+      } node;
+      int sumAtDepth(node *root, int depth) {
+          // Your code here
+      }
+    correctAnswer: |
+      if (root == NULL) return 0;
+      if (depth == 0) return root->data;
+      return sumAtDepth(root->left, depth - 1) + sumAtDepth(root->right, depth - 1);
+    explanation: "The function recursively traverses to the specified depth and sums the data of nodes at that level."
+    imagePath: "diagrams/binary_tree.png"  # Optional image for testing
+
+  # Question 9: Tracing Question
+  - type: Tracing
+    question: "Trace the stack contents after points A, B, C in the given code."
+    codeBlock: |
+      typedef struct node_s {
+          int data;
+          struct node_s *next;
+      } node_t;
+      typedef struct {
+          node_t *top;
+      } stack_t;
+      void push(stack_t *s, int data);
+      int pop(stack_t *s);
+      void followStack(stack_t *myStack) {
+          int x;
+          push(myStack, 12);
+          push(myStack, 5);
+          push(myStack, -8);
+          // A
+          x = pop(myStack);
+          push(myStack, 23);
+          x = pop(myStack);
+          // B
+          push(myStack, 17);
+          push(myStack, -3);
+          x = pop(myStack);
+          push(myStack, 9);
+          push(myStack, 6);
+          push(myStack, -14);
+          x = pop(myStack);
+          x = pop(myStack);
+          push(myStack, 34);
+          // C
+      }
+    tracePoints:
+      - label: "A"
+        correctAnswer: "[-8, 5, 12]"
+      - label: "B"
+        correctAnswer: "[5, 12]"
+      - label: "C"
+        correctAnswer: "[34, 9, 17, 5, 12]"
+    explanation: "The stack follows LIFO order, with pushes adding to the top and pops removing from the top."
+
+  # Question 10: Analysis Question
+  - type: Analysis
+    question: "Convert the decimal number 32456 to base 16, showing each division step."
+    steps:
+      - label: "Step 1: Divide 32456 by 16"
+        correctAnswer: "2028 remainder 8"
+      - label: "Step 2: Divide 2028 by 16"
+        correctAnswer: "126 remainder 12"
+      - label: "Step 3: Divide 126 by 16"
+        correctAnswer: "7 remainder 14"
+      - label: "Step 4: Divide 7 by 16"
+        correctAnswer: "0 remainder 7"
+      - label: "Final answer"
+        correctAnswer: "7EC8"
+    explanation: "Divide by 16 repeatedly, convert remainders (12=C, 14=E) to hex, and read from bottom to top."
+    imagePath: "diagrams/base_conversion.png"  # Optional image for testing

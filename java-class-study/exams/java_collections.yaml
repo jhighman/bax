@@ -150,4 +150,9 @@
 - type: FillInTheBlank
   question: "The _______ interface is used to define how objects should be compared for sorting in collections."
   correctAnswer: "Comparable"
-  explanation: "The Comparable interface defines the natural ordering for a class through its compareTo method. Classes that implement Comparable can be sorted using Collections.sort() or used in sorted collections like TreeSet." 
+  explanation: "The Comparable interface defines the natural ordering for a class through its compareTo method. Classes that implement Comparable can be sorted using Collections.sort() or used in sorted collections like TreeSet."
+
+- type: FillInTheBlank
+  question: "The _______ interface extends Set and guarantees that its elements are stored in ascending order, either using their natural order or a custom Comparator."
+  correctAnswer: "SortedSet"
+  explanation: "The SortedSet interface extends Set and maintains its elements in sorted order. TreeSet is the most common implementation of SortedSet." 

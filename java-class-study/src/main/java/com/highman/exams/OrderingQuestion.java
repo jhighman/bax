@@ -22,16 +22,21 @@ public class OrderingQuestion extends Question {
         this.correctOrder = new ArrayList<>(correctOrder);
     }
 
+    public void addItem(String item) {
+        items.add(item);
+        correctOrder.add(item);
+    }
+
     @Override
     public String getCorrectAnswer() {
-        return correctOrder.toString();
+        return String.join(";", correctOrder);
     }
 
     @Override
     public void display() {
         System.out.println(questionText);
         for (int i = 0; i < items.size(); i++) {
-            System.out.println((i + 1) + ") " + items.get(i));
+            System.out.println((i + 1) + ". " + items.get(i));
         }
     }
 

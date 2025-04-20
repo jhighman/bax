@@ -42,6 +42,9 @@ public class ExamReader {
                 String type = (String) q.get("type");
                 String text = (String) q.get("text");
                 String correct = (String) q.get("correct");
+                if (correct == null) {
+                    correct = (String) q.get("correctAnswer");
+                }
                 String explanation = (String) q.get("explanation");
 
                 if (type == null || text == null) {
