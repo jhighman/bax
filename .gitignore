@@ -1,0 +1,93 @@
+# DDD Course Repository .gitignore
+
+# Rails specific
+course/examples/*/log/*
+course/examples/*/tmp/*
+course/examples/*/db/*.sqlite3
+course/examples/*/db/*.sqlite3-journal
+course/examples/*/db/*.sqlite3-*
+course/examples/*/public/system
+course/examples/*/coverage/
+course/examples/*/spec/tmp
+course/examples/*/config/master.key
+course/examples/*/config/credentials.yml.enc
+
+# Rails cache and sessions
+course/examples/*/.sass-cache/
+course/examples/*/app/assets/builds/*
+course/examples/*/node_modules/
+course/examples/*/yarn-error.log
+course/examples/*/storage/*
+
+# Bundler
+course/examples/*/.bundle/
+course/examples/*/vendor/bundle/
+
+# RSpec
+course/examples/*/spec/examples.txt
+
+# Environment variables
+course/examples/*/.env
+course/examples/*/.env.local
+course/examples/*/.env.development.local
+course/examples/*/.env.test.local
+course/examples/*/.env.production.local
+
+# IDE and Editor files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Course-specific
+course/examples/*/public/uploads
+course/examples/*/public/assets
+course/examples/*/tmp/
+course/examples/*/log/
+
+# Student work directories (if any)
+student-work/
+submissions/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Documentation builds
+course/docs/_site/
+course/docs/.jekyll-cache/
+course/docs/.jekyll-metadata
+
+# Ruby version managers
+.ruby-version
+.rvmrc
+
+# Yarn
+yarn.lock
+package-lock.json
+
+# Local development databases
+*.sqlite
+*.sqlite3
+
+# Compiled assets
+course/examples/*/public/packs
+course/examples/*/public/packs-test
+course/examples/*/public/assets
+
+# Ignore master key for decrypting credentials and more.
+course/examples/*/config/master.key
+
+# Ignore application configuration
+course/examples/*/config/application.yml
