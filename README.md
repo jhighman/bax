@@ -82,6 +82,7 @@ The course is organized into 10 modular units:
 │   ├── resources/              # Additional learning resources
 │   ├── tools/                  # Development tools guides
 │   ├── blog/                   # Inspirational articles and career guidance
+│   ├── correspondence/         # Email templates for course communication
 │   └── assessments/            # Quizzes, assignments, and rubrics
 └── README.md                   # This file
 ```
@@ -175,6 +176,28 @@ When you master Domain-Driven Design, Rails, and PostgreSQL, you're not just lea
 You become more than a specialist—you become a **digital polymath** capable of taking an idea from conception to production.
 
 **[📝 Read All Blog Articles](course/blog/)** - Explore stories of how DDD and Rails skills have launched careers, created startups, and solved real-world problems.
+
+## Email Templates for Course Communication
+
+Streamline your course communication with ready-to-use email templates that you can copy, customize, and send to students.
+
+### 📧 [Course Correspondence Templates](course/correspondence/)
+
+**[Course Invitation Email](course/correspondence/course-invitation.md)**
+Perfect for students with Git access who need to pull repository updates and prepare for the first meetup. Includes setup reminders and course overview.
+
+**[Pre-Course Setup Email](course/correspondence/pre-course-setup.md)**
+Detailed technical setup instructions for PostgreSQL, Ruby/Rails, VS Code, and Mermaid. Includes troubleshooting tips and verification steps.
+
+**[Weekly Module Announcements](course/correspondence/weekly-module.md)**
+Template for announcing new modules, assignments, and weekly progress. Maintains student engagement and provides clear expectations.
+
+### ✨ Key Features
+- **Copy-and-paste ready**: Just customize the bracketed placeholders
+- **Professional tone**: Maintains academic standards while inspiring students
+- **Technical accuracy**: Includes correct setup instructions and commands
+- **Career focus**: Emphasizes entrepreneurial opportunities and real-world applications
+- **Troubleshooting support**: Anticipates common issues and provides solutions
 
 ---
 
