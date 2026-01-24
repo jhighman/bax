@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Courses</h1>
+  <div>
+    <span class="badge bg-secondary fs-6 me-2"><%= @courses.count %> courses</span>
+    <%= link_to "New Course", new_course_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
+<p class="lead text-muted mb-4">
+  Module 3: Courses are now a separate entity in our domain model.
+  In Module 4, we'll connect Students and Courses through Enrollment.
+</p>
+
+<%# Department filter - demonstrates query scopes %>
+<div class="mb-4">
+  <div class="btn-group" role="group">
+    <%= link_to "All", courses_path,
+        class: "btn btn-outline-secondary #{'active' if params[:department].blank?}" %>
+    <% Course.distinct.pluck(:department).compact.each do |dept| %>
+      <%= link_to dept, courses_path(department: dept),
+          class: "btn btn-outline-secondary #{'active' if params[:department] == dept}" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  <% @courses.each do |course| %>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <strong><%= course.course_code %></strong>
+          <span class="badge bg-primary"><%= course.credit_label %></span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= course.title %></h5>
+          <p class="card-text text-muted small">
+            <%= truncate(course.description, length: 100) %>
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Level: <%= course.level %> | <%= course.department %>
+            </small>
+          </p>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group btn-group-sm w-100">
+            <%= link_to "View", course_path(course), class: "btn btn-outline-primary" %>
+            <%= link_to "Edit", edit_course_path(course), class: "btn btn-outline-secondary" %>
+            <%= button_to "Delete", course_path(course), method: :delete,
+                class: "btn btn-outline-danger",
+                data: { turbo_confirm: "Delete #{course.course_code}?" } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if @courses.empty? %>
+  <div class="alert alert-info">
+    No courses found. <%= link_to "Add the first course", new_course_path %>.
+  </div>
+<% end %>
+
+<div class="card bg-light mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Module 3 Notes</h5>
+    <ul class="mb-0">
+      <li><strong>Course</strong> is now a separate entity in our ER model</li>
+      <li>Students and Courses exist independently (no relationship yet)</li>
+      <li>In Module 4, we'll add <strong>Enrollment</strong> to connect them</li>
+      <li>Check the ERD in <code>artifacts/erd/domain-model.md</code></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Courses", courses_path %></li>
+    <li class="breadcrumb-item"><%= link_to @course.course_code, course_path(@course) %></li>
+    <li class="breadcrumb-item active">Edit</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-success text-white">
+        <h4 class="mb-0">Edit <%= @course.course_code %></h4>
+      </div>
+      <div class="card-body">
+        <%= render 'form', course: @course %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card bg-light">
+      <div class="card-header">
+        <strong>Editing Tips</strong>
+      </div>
+      <div class="card-body">
+        <p class="small">
+          Changing the course code may affect students' transcripts in a real system.
+        </p>
+        <p class="small mb-0">
+          In production, you might make course_code immutable after creation.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

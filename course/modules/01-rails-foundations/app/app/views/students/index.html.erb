@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Students</h1>
+  <span class="badge bg-secondary fs-6"><%= @students.count %> students</span>
+</div>
+
+<p class="lead text-muted mb-4">
+  Welcome to the UCF Course Manager. This is Module 1, demonstrating basic Rails concepts
+  with in-memory data storage.
+</p>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Student Number</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Major</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%#
+        ERB (Embedded Ruby) uses <% %> for Ruby code and <%= %> to output
+        Java equivalent: JSTL <c:forEach items="${students}" var="student">
+        C equivalent: for loop iterating through array of structs
+      %>
+      <% @students.each do |student| %>
+        <tr>
+          <td><code><%= student.student_number %></code></td>
+          <td><%= student.full_name %></td>
+          <td><%= mail_to student.email, student.email %></td>
+          <td><%= student.major %></td>
+          <td>
+            <%= link_to "View", student_path(student.id), class: "btn btn-sm btn-outline-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="card bg-light mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Module 1 Notes</h5>
+    <ul class="mb-0">
+      <li>Students are stored <strong>in memory</strong> using a Ruby class</li>
+      <li>Data will be lost when the server restarts</li>
+      <li>In Module 2, we'll connect to PostgreSQL for persistent storage</li>
+    </ul>
+  </div>
+</div>

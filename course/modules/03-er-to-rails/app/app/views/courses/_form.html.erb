@@ -1,0 +1,74 @@
+<%#
+  Course form partial - shared between new and edit
+
+  Compare this to the Student form partial:
+  - Same structure and Bootstrap styling
+  - Different fields matching Course attributes
+  - This consistency is a Rails convention
+%>
+
+<%= form_with model: course, class: "needs-validation" do |form| %>
+  <% if course.errors.any? %>
+    <div class="alert alert-danger">
+      <h5 class="alert-heading">
+        <%= pluralize(course.errors.count, "error") %> prevented this course from being saved:
+      </h5>
+      <ul class="mb-0">
+        <% course.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="mb-3">
+        <%= form.label :course_code, class: "form-label" %>
+        <%= form.text_field :course_code, class: "form-control", required: true,
+            placeholder: "e.g., COP3502", style: "text-transform: uppercase;" %>
+        <div class="form-text">Format: 3 letters + 4 digits (e.g., COP3502)</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="mb-3">
+        <%= form.label :credits, class: "form-label" %>
+        <%= form.number_field :credits, class: "form-control", min: 1, max: 6, value: course.credits || 3 %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="mb-3">
+        <%= form.label :department, class: "form-label" %>
+        <%= form.select :department,
+            options_for_select([
+              "Computer Science",
+              "Information Technology",
+              "Electrical Engineering",
+              "Mathematics",
+              "Statistics"
+            ], course.department),
+            { include_blank: "Select department..." },
+            { class: "form-select" } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", required: true,
+        placeholder: "e.g., Computer Science I" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control", rows: 4,
+        placeholder: "Course description..." %>
+  </div>
+
+  <hr class="my-4">
+
+  <div class="d-flex justify-content-between">
+    <%= link_to "Cancel", courses_path, class: "btn btn-secondary" %>
+    <%= form.submit class: "btn btn-success" %>
+  </div>
+<% end %>

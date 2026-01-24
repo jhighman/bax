@@ -1,0 +1,89 @@
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Courses", courses_path %></li>
+    <li class="breadcrumb-item active"><%= @course.course_code %></li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0"><%= @course.display_name %></h4>
+        <%= link_to "Edit", edit_course_path(@course), class: "btn btn-light btn-sm" %>
+      </div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <span class="badge bg-primary fs-6"><%= @course.credit_label %></span>
+            <span class="badge bg-secondary fs-6"><%= @course.level %></span>
+          </div>
+          <div class="col-md-8 text-end">
+            <span class="text-muted"><%= @course.department %></span>
+          </div>
+        </div>
+
+        <h5>Description</h5>
+        <p><%= @course.description || "No description available." %></p>
+
+        <hr>
+
+        <dl class="row mb-0">
+          <dt class="col-sm-4">Course Code</dt>
+          <dd class="col-sm-8"><code><%= @course.course_code %></code></dd>
+
+          <dt class="col-sm-4">Credits</dt>
+          <dd class="col-sm-8"><%= @course.credits %></dd>
+
+          <dt class="col-sm-4">Department</dt>
+          <dd class="col-sm-8"><%= @course.department %></dd>
+
+          <dt class="col-sm-4">Level</dt>
+          <dd class="col-sm-8"><%= @course.level %></dd>
+
+          <dt class="col-sm-4 text-muted">Created</dt>
+          <dd class="col-sm-8 text-muted"><%= @course.created_at.strftime("%B %d, %Y") %></dd>
+        </dl>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+        <%= link_to "Back to Courses", courses_path, class: "btn btn-secondary" %>
+        <%= button_to "Delete Course", course_path(@course), method: :delete,
+            class: "btn btn-danger",
+            data: { turbo_confirm: "Delete #{@course.course_code}? This cannot be undone." } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card bg-light mb-3">
+      <div class="card-header">
+        <strong>ER Model View</strong>
+      </div>
+      <div class="card-body">
+        <p class="small">
+          This <strong>Course</strong> entity has:
+        </p>
+        <ul class="small">
+          <li><strong>Identity:</strong> id=<%= @course.id %></li>
+          <li><strong>Business Key:</strong> <%= @course.course_code %></li>
+          <li><strong>Attributes:</strong> title, description, credits, department</li>
+        </ul>
+        <p class="small mb-0">
+          In Module 4, courses will have <code>has_many :enrollments</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="card bg-warning bg-opacity-25">
+      <div class="card-header">
+        <strong>Coming in Module 4</strong>
+      </div>
+      <div class="card-body">
+        <p class="small mb-0">
+          This page will show enrolled students once we add the
+          <strong>Enrollment</strong> relationship.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Students", students_path %></li>
+    <li class="breadcrumb-item"><%= link_to @student.full_name, student_path(@student) %></li>
+    <li class="breadcrumb-item active">Edit</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Edit <%= @student.full_name %></h4>
+      </div>
+      <div class="card-body">
+        <%#
+          Same form partial, but @student has existing data
+          Rails automatically detects this is an existing record
+          and changes the form action to PATCH /students/:id
+
+          Java equivalent: Same form, but pre-populated with th:field values
+        %>
+        <%= render 'form', student: @student %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card bg-light">
+      <div class="card-header">
+        <strong>Updating Records</strong>
+      </div>
+      <div class="card-body">
+        <p class="small">
+          When you submit this form, Rails will:
+        </p>
+        <ol class="small">
+          <li>Send a PATCH request to <code>/students/<%= @student.id %></code></li>
+          <li>Controller calls <code>@student.update(params)</code></li>
+          <li>Validations run on the model</li>
+          <li>If valid, executes UPDATE query</li>
+          <li>Redirect to the student's page</li>
+        </ol>
+        <p class="small mb-0">
+          <strong>SQL executed:</strong><br>
+          <code class="small">UPDATE students SET ... WHERE id = <%= @student.id %></code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

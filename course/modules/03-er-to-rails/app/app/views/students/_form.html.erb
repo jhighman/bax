@@ -1,0 +1,86 @@
+<%#
+  Shared form partial for new and edit actions
+
+  Rails forms are similar to HTML forms but with added features:
+  - CSRF protection (automatic security token)
+  - Model binding (form fields map to model attributes)
+  - Validation error display
+
+  Java equivalent: Thymeleaf <form th:object="${student}"> with th:field bindings
+  C equivalent: HTML form with manual field handling
+%>
+
+<%= form_with model: student, class: "needs-validation" do |form| %>
+  <%# Display validation errors if any %>
+  <% if student.errors.any? %>
+    <div class="alert alert-danger">
+      <h5 class="alert-heading">
+        <%= pluralize(student.errors.count, "error") %> prevented this student from being saved:
+      </h5>
+      <ul class="mb-0">
+        <% student.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :student_number, class: "form-label" %>
+        <%= form.text_field :student_number, class: "form-control", required: true,
+            placeholder: "e.g., UCF001" %>
+        <div class="form-text">Unique identifier for the student</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :first_name, class: "form-label" %>
+        <%= form.text_field :first_name, class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :last_name, class: "form-label" %>
+        <%= form.text_field :last_name, class: "form-control", required: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :email, class: "form-label" %>
+        <%= form.email_field :email, class: "form-control",
+            placeholder: "student@ucf.edu" %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :major, class: "form-label" %>
+        <%= form.select :major,
+            options_for_select([
+              "Computer Science",
+              "Information Technology",
+              "Software Engineering",
+              "Data Science",
+              "Cybersecurity",
+              "Computer Engineering"
+            ], student.major),
+            { include_blank: "Select a major..." },
+            { class: "form-select" } %>
+      </div>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <div class="d-flex justify-content-between">
+    <%= link_to "Cancel", students_path, class: "btn btn-secondary" %>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

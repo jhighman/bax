@@ -1,0 +1,55 @@
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Students", students_path %></li>
+    <li class="breadcrumb-item active"><%= @student.full_name %></li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><%= @student.full_name %></h4>
+      </div>
+      <div class="card-body">
+        <dl class="row mb-0">
+          <dt class="col-sm-4">Student Number</dt>
+          <dd class="col-sm-8"><code><%= @student.student_number %></code></dd>
+
+          <dt class="col-sm-4">First Name</dt>
+          <dd class="col-sm-8"><%= @student.first_name %></dd>
+
+          <dt class="col-sm-4">Last Name</dt>
+          <dd class="col-sm-8"><%= @student.last_name %></dd>
+
+          <dt class="col-sm-4">Email</dt>
+          <dd class="col-sm-8"><%= mail_to @student.email, @student.email %></dd>
+
+          <dt class="col-sm-4">Major</dt>
+          <dd class="col-sm-8"><%= @student.major %></dd>
+        </dl>
+      </div>
+      <div class="card-footer">
+        <%= link_to "Back to Students", students_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card bg-light">
+      <div class="card-header">
+        <strong>Understanding the Code</strong>
+      </div>
+      <div class="card-body">
+        <p class="small">
+          This view uses <strong>instance variables</strong> (<code>@student</code>)
+          passed from the controller.
+        </p>
+        <p class="small mb-0">
+          <strong>Java equivalent:</strong><br>
+          <code>model.getAttribute("student")</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

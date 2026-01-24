@@ -1,0 +1,70 @@
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Students", students_path %></li>
+    <li class="breadcrumb-item active"><%= @student.full_name %></li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0"><%= @student.full_name %></h4>
+        <div>
+          <%= link_to "Edit", edit_student_path(@student), class: "btn btn-light btn-sm" %>
+        </div>
+      </div>
+      <div class="card-body">
+        <dl class="row mb-0">
+          <dt class="col-sm-4">Student Number</dt>
+          <dd class="col-sm-8"><code><%= @student.student_number %></code></dd>
+
+          <dt class="col-sm-4">First Name</dt>
+          <dd class="col-sm-8"><%= @student.first_name %></dd>
+
+          <dt class="col-sm-4">Last Name</dt>
+          <dd class="col-sm-8"><%= @student.last_name %></dd>
+
+          <dt class="col-sm-4">Email</dt>
+          <dd class="col-sm-8"><%= mail_to @student.email, @student.email if @student.email.present? %></dd>
+
+          <dt class="col-sm-4">Major</dt>
+          <dd class="col-sm-8"><%= @student.major || "Not declared" %></dd>
+
+          <dt class="col-sm-4 text-muted">Created</dt>
+          <dd class="col-sm-8 text-muted"><%= @student.created_at.strftime("%B %d, %Y at %I:%M %p") %></dd>
+
+          <dt class="col-sm-4 text-muted">Last Updated</dt>
+          <dd class="col-sm-8 text-muted"><%= @student.updated_at.strftime("%B %d, %Y at %I:%M %p") %></dd>
+        </dl>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+        <%= link_to "Back to Students", students_path, class: "btn btn-secondary" %>
+        <%= button_to "Delete Student", student_path(@student), method: :delete,
+            class: "btn btn-danger",
+            data: { turbo_confirm: "Are you sure you want to delete #{@student.full_name}? This cannot be undone." } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card bg-light">
+      <div class="card-header">
+        <strong>Database Record</strong>
+      </div>
+      <div class="card-body">
+        <p class="small">
+          This student is stored in PostgreSQL with ID <code><%= @student.id %></code>.
+        </p>
+        <p class="small">
+          <strong>SQL executed:</strong><br>
+          <code class="small">SELECT * FROM students WHERE id = <%= @student.id %></code>
+        </p>
+        <p class="small mb-0">
+          <strong>Active Record equivalent:</strong><br>
+          <code>Student.find(<%= @student.id %>)</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

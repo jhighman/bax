@@ -1,0 +1,40 @@
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Courses", courses_path %></li>
+    <li class="breadcrumb-item active">New Course</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-success text-white">
+        <h4 class="mb-0">New Course</h4>
+      </div>
+      <div class="card-body">
+        <%= render 'form', course: @course %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card bg-light">
+      <div class="card-header">
+        <strong>Course Code Format</strong>
+      </div>
+      <div class="card-body">
+        <p class="small">UCF course codes follow a pattern:</p>
+        <ul class="small">
+          <li><strong>COP</strong> = Computer Programming</li>
+          <li><strong>COT</strong> = Computer Theory</li>
+          <li><strong>CDA</strong> = Computer Design/Architecture</li>
+          <li><strong>CIS</strong> = Computer Information Systems</li>
+        </ul>
+        <p class="small mb-0">
+          The first digit indicates level:<br>
+          3xxx = Junior, 4xxx = Senior, 5xxx+ = Graduate
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
