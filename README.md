@@ -29,70 +29,85 @@ Upon completion, students will be able to:
 
 ## Course Structure
 
-The course is organized into 10 modular units:
+The course builds the **UCF Course Manager** application incrementally across 10 modules. Each module contains a working Rails app with Bootstrap that you can run immediately.
 
-1. **[Foundations of DDD and Database Alignment](course/modules/01-foundations-ddd-database-alignment/)**
-   - Introduction to DDD vs. traditional approaches
-   - Ubiquitous language and why to start with databases/ERDs
+1. **[Rails Foundations for Java/C Developers](course/modules/01-rails-foundations/)**
+   - First working Rails app with Bootstrap
+   - Ruby basics for Java/C developers, MVC pattern
 
-2. **[ER Modeling with IE Semantics](course/modules/02-er-modeling-ie-semantics/)**
-   - Entity types, relationships, descriptors/composite descriptors
-   - Normalization and avoiding "Value Objects" jargon
+2. **[Database-First Development](course/modules/02-database-first/)**
+   - PostgreSQL connection, first migration
+   - Active Record ORM, CRUD operations
 
-3. **[Bounded Contexts and Domain Decomposition](course/modules/03-bounded-contexts-domain-decomposition/)**
-   - Dividing domains and mapping to schemas
-   - IE's enterprise modeling approach
+3. **[ER Modeling to Rails Models](course/modules/03-er-to-rails/)**
+   - Add Course entity, Mermaid ERD diagrams
+   - Translate ER concepts to Rails models
 
-4. **[Entities and Descriptors](course/modules/04-entities-descriptors/)**
-   - Identity-based entities and structured attributes
-   - Fowler's patterns like Quantity or Money
+4. **[The Enrollment Aggregate](course/modules/04-enrollment-aggregate/)**
+   - Many-to-many relationships with business logic
+   - Join models, use case documentation
 
-5. **[Aggregates and Consistency](course/modules/05-aggregates-consistency/)**
-   - Clustering entities/descriptors and transaction boundaries
-   - ER foreign keys for invariants
+5. **[Descriptors (Composite Attributes)](course/modules/05-descriptors/)**
+   - Address, PersonName as structured data
+   - IE terminology for Value Objects
 
-6. **[Repositories and Services in Full-Stack Development](course/modules/06-repositories-services-fullstack/)**
-   - Persistence abstractions and domain services
-   - Rails Active Record integration
+6. **[Domain Services](course/modules/06-domain-services/)**
+   - Extract business logic into service objects
+   - Single Responsibility Principle
 
-7. **[Context Mapping and Strategic DDD](course/modules/07-context-mapping-strategic-ddd/)**
-   - Relating contexts and core vs. supporting domains
-   - Scaling with microservices/databases
+7. **[Bounded Contexts](course/modules/07-bounded-contexts/)**
+   - Separate Academic from Administrative concerns
+   - Sprint planning introduction
 
-8. **[Incorporating Fowler's Analysis Patterns](course/modules/08-fowler-analysis-patterns/)**
-   - Deep dive into patterns (Party, Observation, etc.)
-   - Application to ERDs and Rails
+8. **[Faculty and Scheduling](course/modules/08-faculty-scheduling/)**
+   - Faculty entity, course scheduling
+   - Fowler's Party pattern basics
 
-9. **[DDD in the SDLC](course/modules/09-ddd-in-sdlc/)**
-   - Full cycle walkthrough from requirements to deployment
-   - Event storming, modeling, Rails prototyping
+9. **[Authentication & Authorization](course/modules/09-authentication/)**
+   - User accounts, role-based access
+   - Devise authentication
 
-10. **[Capstone and Advanced Topics](course/modules/10-capstone-advanced-topics/)**
-    - Build a Rails app from ERD
-    - Evolution, refactoring, and real-world challenges
+10. **[Capstone - Complete Application](course/modules/10-capstone/)**
+    - Production-ready UCF Course Manager
+    - Deployment and documentation
 
 ## Repository Structure
 
 ```
-├── archived/                    # Archived Java content
+├── archived/                    # Archived content (original modules, Java examples)
 ├── course/
-│   ├── modules/                # Course modules (01-10)
-│   ├── docs/                   # Course documentation and guides
-│   ├── examples/               # Code examples and Rails projects
-│   ├── resources/              # Additional learning resources
-│   ├── tools/                  # Development tools guides
-│   ├── blog/                   # Inspirational articles and career guidance
-│   ├── correspondence/         # Email templates for course communication
-│   └── assessments/            # Quizzes, assignments, and rubrics
+│   ├── modules/                # Course modules (01-10), each with working Rails app
+│   │   ├── 01-rails-foundations/
+│   │   │   ├── README.md       # Learning content
+│   │   │   ├── INSTRUCTIONS.md # Step-by-step build guide
+│   │   │   └── app/            # Working Rails application
+│   │   ├── 02-database-first/
+│   │   ├── ...
+│   │   └── 10-capstone/
+│   ├── docs/                   # Setup guides and documentation
+│   ├── tools/                  # Mermaid, VS Code, PostgreSQL guides
+│   ├── blog/                   # Career inspiration articles
+│   └── correspondence/         # Email templates for instructors
 └── README.md                   # This file
 ```
 
 ## Getting Started
 
-1. Review the [Course Writing Guide](course/docs/COURSE_WRITING_GUIDE.md) for content creation guidelines
-2. Explore individual modules in the `course/modules/` directory
-3. Set up the Rails development environment using examples in `course/examples/`
-4. Complete assessments and exercises as you progress through each module
+### For Students
+
+1. **Set up your environment:**
+   - Windows: Follow the [Windows Setup Guide](course/docs/WINDOWS_SETUP.md)
+   - macOS: Install Ruby 3.2+, Rails 8+, PostgreSQL 16+
+2. Clone this repository: `git clone https://github.com/jhighman/bax.git`
+3. Start with [Module 1: Rails Foundations](course/modules/01-rails-foundations/)
+4. Each module has a `README.md` (concepts) and `INSTRUCTIONS.md` (step-by-step)
+5. Run the app in each module's `app/` folder: `bundle install && rails server`
+
+### For Instructors
+
+1. Review the [Course Writing Guide](course/docs/COURSE_WRITING_GUIDE.md) for content guidelines
+2. See [Module Template](course/docs/MODULE_TEMPLATE.md) for creating new content
+3. Email templates available in [Correspondence](course/correspondence/)
 
 ## Key Terminology
 
@@ -112,12 +127,14 @@ This course uses Information Engineering (IE) terminology to maintain alignment 
 
 ## Technology Stack
 
-- **Database Modeling**: ER diagrams with IE notation
-- **Backend Development**: Ruby on Rails 7+
-- **Database**: PostgreSQL (primary), SQLite (development)
+- **Backend Development**: Ruby on Rails 8+
+- **Database**: PostgreSQL 16+
+- **Frontend**: Bootstrap 5
+- **Database Modeling**: Mermaid ERD diagrams
 - **Version Control**: Git
-- **Testing**: RSpec
-- **Deployment**: Heroku
+- **AI Assistant**: Claude Code
+- **Testing**: RSpec (introduced in Module 4)
+- **IDE**: VS Code with Ruby/Rails extensions
 
 ## Development Tools
 
