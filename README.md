@@ -29,47 +29,43 @@ Upon completion, students will be able to:
 
 ## Course Structure
 
-The course builds the **UCF Course Manager** application incrementally across 10 modules. Each module contains a working Rails app with Bootstrap that you can run immediately.
+The course builds the **UCF Course Manager** application incrementally across 10 modules. Each module follows a **database-first, database-last** approach:
 
-1. **[Rails Foundations for Java/C Developers](course/modules/01-rails-foundations/)**
-   - First working Rails app with Bootstrap
-   - Ruby basics for Java/C developers, MVC pattern
+1. **Start with the database concept** (ER diagram, schema design, constraints)
+2. **Implement in Rails** (migrations, models, views)
+3. **Return to the database** (verify the schema, understand what Rails generated)
 
-2. **[Database-First Development](course/modules/02-database-first/)**
-   - PostgreSQL connection, first migration
-   - Active Record ORM, CRUD operations
+Rails is the vehicle—**relational database design is the destination**.
 
-3. **[ER Modeling to Rails Models](course/modules/03-er-to-rails/)**
-   - Add Course entity, Mermaid ERD diagrams
-   - Translate ER concepts to Rails models
+---
 
-4. **[The Enrollment Aggregate](course/modules/04-enrollment-aggregate/)**
-   - Many-to-many relationships with business logic
-   - Join models, use case documentation
+### Module Overview
 
-5. **[Descriptors (Composite Attributes)](course/modules/05-descriptors/)**
-   - Address, PersonName as structured data
-   - IE terminology for Value Objects
+| Module | Database Concept | Rails Implementation | Database Verification |
+|--------|------------------|---------------------|----------------------|
+| **[1. Rails Foundations](course/modules/01-rails-foundations/)** | Entity concept, attributes | Model class, in-memory data | Preview: what a table will look like |
+| **[2. Database-First Development](course/modules/02-database-first/)** | CREATE TABLE, PRIMARY KEY, NOT NULL | Migrations, Active Record | Inspect schema.rb, psql queries |
+| **[3. ER to Rails Models](course/modules/03-er-to-rails/)** | Multiple entities, UNIQUE constraints | Second model, indexes | ERD artifact, compare diagram to schema |
+| **[4. Enrollment Aggregate](course/modules/04-enrollment-aggregate/)** | Many-to-many, junction tables, FOREIGN KEY | has_many :through, join model | Examine foreign key constraints |
+| **[5. Descriptors](course/modules/05-descriptors/)** | Composite attributes, normalization decisions | Embedded attributes vs separate tables | When to normalize, when not to |
+| **[6. Domain Services](course/modules/06-domain-services/)** | Transactions, ACID properties | Service objects, transaction blocks | Database transaction logs |
+| **[7. Bounded Contexts](course/modules/07-bounded-contexts/)** | Schema separation, cross-schema references | Namespaced models, modules | Multiple schemas in PostgreSQL |
+| **[8. Faculty & Scheduling](course/modules/08-faculty-scheduling/)** | Party pattern, temporal data | Polymorphic associations | Date/time columns, scheduling queries |
+| **[9. Authentication](course/modules/09-authentication/)** | User tables, secure storage | Devise, role columns | Password hashing, token storage |
+| **[10. Capstone](course/modules/10-capstone/)** | Complete ERD review | Full application | Final schema walkthrough |
 
-6. **[Domain Services](course/modules/06-domain-services/)**
-   - Extract business logic into service objects
-   - Single Responsibility Principle
+---
 
-7. **[Bounded Contexts](course/modules/07-bounded-contexts/)**
-   - Separate Academic from Administrative concerns
-   - Sprint planning introduction
+### Each Module Contains
 
-8. **[Faculty and Scheduling](course/modules/08-faculty-scheduling/)**
-   - Faculty entity, course scheduling
-   - Fowler's Party pattern basics
-
-9. **[Authentication & Authorization](course/modules/09-authentication/)**
-   - User accounts, role-based access
-   - Devise authentication
-
-10. **[Capstone - Complete Application](course/modules/10-capstone/)**
-    - Production-ready UCF Course Manager
-    - Deployment and documentation
+```
+module-folder/
+├── README.md           # Database concept first, then Rails mapping
+├── INSTRUCTIONS.md     # Build steps, ending with DB verification
+├── app/                # Working Rails application
+└── artifacts/
+    └── erd/            # Mermaid ERD diagrams
+```
 
 ## Repository Structure
 
