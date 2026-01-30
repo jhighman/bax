@@ -1,8 +1,30 @@
 # Setup Instructions
 
-## Prerequisites
+## Getting Legoria Running
 
-Legoria (the ATS) should already be running locally. If not, ask Dad to start it up.
+Legoria is a Rails 8 app on GitHub. You need to clone it and set it up locally.
+
+**Source code:** [github.com/jhighman/legoria](https://github.com/jhighman/legoria)
+
+### 🪟 On Windows?
+
+See the full step-by-step guide: **[SETUP-WINDOWS.md](./SETUP-WINDOWS.md)**
+
+It covers WSL vs. native Ruby, installing dependencies, and all the Windows-specific gotchas.
+
+### Quick Setup (Mac/Linux)
+
+```bash
+# Prerequisites: Ruby 3.4.5, Bundler, SQLite3
+git clone https://github.com/jhighman/legoria.git
+cd legoria
+bundle install
+bin/rails db:create db:migrate db:seed
+bin/rails runner script/build_rich_scenario.rb
+bin/rails server
+```
+
+Open http://localhost:3000 — you're in.
 
 ## Connecting to the Application
 

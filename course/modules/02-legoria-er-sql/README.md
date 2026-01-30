@@ -166,7 +166,7 @@ We'll cover two domains:
 - **Part 3: The Bridge Moment** — Connecting ER → SQL → GUI → API
 - **Part 4: Challenge Query** — Tying both domains together
 
-> 📋 **Setup:** Before you start, see [INSTRUCTIONS.md](./INSTRUCTIONS.md) for how to connect.  
+> 📋 **Setup:** See [INSTRUCTIONS.md](./INSTRUCTIONS.md) to get Legoria running. **On Windows?** See [SETUP-WINDOWS.md](./SETUP-WINDOWS.md) for the full walkthrough.  
 > 📎 **Quick ref:** Keep [cheat-sheet.md](./cheat-sheet.md) open in a second tab.
 
 ---
@@ -582,6 +582,7 @@ This is what real software architecture looks like — not one giant table, but 
 | File | What It Is |
 |------|-----------|
 | [INSTRUCTIONS.md](./INSTRUCTIONS.md) | Setup guide — how to connect |
+| [SETUP-WINDOWS.md](./SETUP-WINDOWS.md) | Full Windows setup (WSL + native Ruby) |
 | [cheat-sheet.md](./cheat-sheet.md) | Quick reference card |
 | [exercises/01-rbac-queries.sql](./exercises/01-rbac-queries.sql) | RBAC SQL exercises |
 | [exercises/02-pipeline-queries.sql](./exercises/02-pipeline-queries.sql) | Pipeline SQL exercises |
