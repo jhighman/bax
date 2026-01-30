@@ -6,9 +6,84 @@
 
 ---
 
+## Meet Legoria: The Only Way to Invent the Future Is to Build It
+
+Before we touch SQL or ER diagrams, let's talk about what we're actually building — and *why*.
+
+### What Is an ATS?
+
+An **Applicant Tracking System** is the software that companies use to manage hiring. Every time you apply for a job online — upload your resume, answer screening questions, get an email saying "we'll be in touch" — an ATS is behind it. Companies like Greenhouse, Lever, Workday, and iCIMS make these products. It's a multi-billion dollar market because *every company that hires people needs one*.
+
+An ATS does more than store resumes. It:
+- Posts jobs to job boards and career sites
+- Tracks every applicant through a hiring pipeline (Applied → Screening → Interview → Offer → Hired)
+- Manages who can see what (recruiters see everything; interviewers see only their assigned candidates)
+- Schedules interviews and collects feedback via scorecards
+- Handles offers, approvals, and compliance (EEOC, I-9 verification)
+- Produces reports so leadership can ask: "How fast are we hiring? Where are the bottlenecks?"
+
+### Why Build One?
+
+Here's the thing about learning software engineering: you can read about patterns, study diagrams, and memorize SQL syntax — but none of it *clicks* until you see it in a real system solving a real problem. **The only way to invent the future is to build it.**
+
+Legoria is our build. It's a next-generation ATS designed from scratch with a specific philosophy: **hiring is not a recruiter workflow — it's a multi-actor ecosystem**. That's a concept of operations (ConOps) decision, and it shapes every table in the database.
+
+### Legoria's Operating Philosophy
+
+Most ATS products are built for recruiters. Legoria is designed for *everyone who touches hiring*:
+
+| Actor | What They Need | What the System Gives Them |
+|-------|---------------|---------------------------|
+| **Recruiter** | Speed, coordination, pipeline visibility | Task lists, kanban boards, bulk actions, SLA alerts |
+| **Hiring Manager** | Confidence, minimal time investment | Simplified views, approval queues, team feedback summaries |
+| **Interviewer** | Prep materials, fast feedback submission | Interview kits, mobile scorecards, structured evaluation |
+| **Executive** | 30-second health check | Dashboard KPIs, drill-down metrics, trend lines |
+| **Compliance Officer** | Audit-ready records | EEOC reports, adverse action workflows, immutable audit trails |
+| **Candidate** | Transparency, low friction | No-login apply, status tracking, self-scheduling |
+
+This isn't just a feature list. It's a **data model decision**. When you design for multiple actors, you need:
+- **RBAC** (Role-Based Access Control) so each actor sees only what they should
+- **Audit trails** so every action is traceable and defensible
+- **Stage pipelines** so candidates move through a structured process, not an email chain
+- **Multi-tenant isolation** so one company's data never leaks into another's
+
+Every one of those requirements becomes tables, columns, foreign keys, and constraints. The ConOps drives the schema. The schema drives the application. That's the chain we're going to trace today.
+
+### Nine Principles That Shape the Data Model
+
+Legoria was designed around nine operating principles. Each one has consequences for how data is structured:
+
+1. **Security and privacy are the foundation, not a feature** → RBAC tables, encrypted PII columns, immutable audit logs
+2. **I-9 verification is first-class, not an afterthought** → Verification workflow tables, document tracking, compliance timestamps
+3. **Hiring is an ecosystem, not a recruiter workflow** → Role-specific views, actor-scoped queries, permission granularity
+4. **The system drives decisions, not stores resumes** → Pipeline stages, SLA tracking, automated alerts
+5. **Sourcing is measurable ROI** → Source attribution on every application, conversion tracking
+6. **Interview structure is how quality scales** → Scorecard templates, competency ratings, structured feedback
+7. **The hiring record must be defensible** → Who evaluated what, when, and why — all stored, all queryable
+8. **Remote hiring requires assurance** → Document capture, verification workflows, exception handling
+9. **Integration is the operating model** → Webhook tables, API audit logs, SSO configuration
+
+You don't need to memorize these. But as we walk through the data model today, you'll see how these principles show up as *actual tables and relationships*. That's the lesson: **philosophy becomes schema becomes software**.
+
+### Simulating Go-to-Market
+
+In the real world, software products don't start with code. They start with a problem, a vision, and a plan. Then:
+
+1. **ConOps** (Concept of Operations) — who are the actors, what do they need, how does the system serve them?
+2. **Data Model** — what entities exist, how do they relate, what are the constraints?
+3. **Build** — code the application against the model
+4. **Seed** — populate with realistic data to test and demonstrate
+5. **Go to Market** — show it to users, get feedback, iterate
+
+Today, Legoria is at step 4. It's built, seeded with realistic hiring scenarios (7 candidates, 4 roles, 36 permissions, a full pipeline), and running locally. We're going to explore it like a product team doing a walkthrough before launch. You'll see the ER diagrams, run SQL queries against real data, and map everything back to the screens.
+
+This is what building a software product feels like from the inside.
+
+---
+
 ## A Brief History: How We Got Here
 
-Before we dive into Legoria, let's talk about *why* relational databases exist and why ER diagrams still matter 50 years after they were invented.
+Before we dive into the hands-on work, let's talk about *why* relational databases exist and why ER diagrams still matter 50 years after they were invented.
 
 ### The Relational Revolution (1970s)
 
