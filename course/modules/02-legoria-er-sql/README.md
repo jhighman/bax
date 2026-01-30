@@ -6,6 +6,73 @@
 
 ---
 
+## A Brief History: How We Got Here
+
+Before we dive into Legoria, let's talk about *why* relational databases exist and why ER diagrams still matter 50 years after they were invented.
+
+### The Relational Revolution (1970s)
+
+In 1970, an IBM researcher named **Edgar F. Codd** published a paper called *"A Relational Model of Data for Large Shared Data Banks."* It was a bombshell. Before Codd, data was stored in hierarchical or network databases — rigid tree structures where navigating from one record to another meant following physical pointers. If you wanted to ask a new question of your data, you often had to restructure the entire database.
+
+Codd's insight was radical: **separate the logical structure of data from its physical storage.** Store data in tables (relations). Let people query it with a declarative language (what became SQL). The database engine figures out *how* to get the data — you just say *what* you want.
+
+This was more than a technical advance. It was a **business revolution:**
+
+- **1979 — Oracle** ships the first commercial relational database. Suddenly enterprises can store and query structured data without an army of programmers maintaining pointer chains.
+- **1983 — IBM's DB2** brings relational databases to mainframes. Banks, airlines, and governments adopt them wholesale.
+- **1986 — SQL becomes an ANSI standard.** One query language to rule them all. Skills become portable across vendors.
+- **1989 — Microsoft SQL Server** launches. Relational databases move from mainframes to departmental servers.
+- **1995 — MySQL and PostgreSQL** emerge as open-source alternatives. Now startups and universities can use relational databases for free. The web explosion runs on them.
+
+By the late 1990s, relational databases were *the* way to store business data. Every ERP, CRM, HR system, banking platform, and e-commerce site ran on SQL. The reason? **Relational databases model the real world well.** Customers have orders. Orders have line items. Employees have departments. These are *relationships* — and that's exactly what relational databases were designed for.
+
+### The ER Diagram: A Shared Language (1976)
+
+In 1976, **Peter Chen** published his paper on Entity-Relationship modeling. The ER diagram gave people a visual language to talk about data *before* writing any SQL or code. For the first time, a business analyst and a database engineer could look at the same picture and agree on what the system needed to store.
+
+This matters more than it sounds. The hardest part of building software isn't writing code — it's **making sure everyone agrees on what the system should do.** ER diagrams became the bridge between business thinking and technical implementation. They still are.
+
+### ER Diagrams and Object-Oriented Design
+
+If you've studied OO programming (and at UCF, you have), ER diagrams should feel familiar. That's not a coincidence.
+
+| ER Concept | OO Concept |
+|-----------|-----------|
+| Entity | Class |
+| Attribute | Property / Field |
+| Relationship | Association / Reference |
+| Primary Key | Object Identity |
+| Foreign Key | Object Reference |
+| Join Table (many-to-many) | Collection of associated objects |
+| Inheritance (is-a) | Class inheritance |
+
+When you draw an ER diagram, you're doing something very close to **object-oriented analysis and design** — you're identifying the key *things* in your domain, their *attributes*, and how they *relate* to each other. The ER diagram is a data-centric view; a UML class diagram is a behavior-centric view. But they're modeling the same reality.
+
+In practice, tools like **Active Record** (Rails), **Hibernate** (Java), and **Entity Framework** (.NET) exist precisely because the mapping between ER models and object models is so natural. An entity becomes a class. A row becomes an object. A foreign key becomes a reference. This is called **Object-Relational Mapping (ORM)** — and it works because ER and OO are two lenses on the same truth.
+
+### The NoSQL Era: Different Shape, Same Thinking (2000s–Now)
+
+In the 2000s, companies like Google, Amazon, and Facebook hit problems that relational databases struggled with: billions of rows, petabytes of data, globally distributed systems. The response was **NoSQL** — a family of databases that trade SQL's strict structure for flexibility and scale:
+
+- **Document stores** (MongoDB) — store JSON-like documents instead of rows
+- **Key-value stores** (Redis, DynamoDB) — ultra-fast lookups by key
+- **Column-family stores** (Cassandra) — optimized for write-heavy, distributed workloads
+- **Graph databases** (Neo4j) — model relationships as first-class citizens
+
+Here's the thing most people miss: **NoSQL didn't replace relational thinking. It absorbed it.**
+
+A MongoDB collection of "users" with embedded "orders" is still entities with relationships — just denormalized into one document. A DynamoDB table with partition keys and sort keys is still modeling access patterns that map to ER concepts. When teams design a NoSQL schema, they almost always start by drawing... an ER diagram. They just implement it differently.
+
+Even graph databases — which seem the furthest from tables — map beautifully to ER diagrams. Nodes are entities. Edges are relationships. Properties are attributes. The ER diagram is the *thinking tool*; the database is the *implementation choice*.
+
+### Why This Still Matters in 2026
+
+The tech stack changes. SQL, NoSQL, NewSQL, vector databases, whatever comes next. But the **skill of looking at a business domain and identifying entities, attributes, and relationships** — that's permanent. That's what ER modeling teaches you. It's not about drawing boxes and lines. It's about *seeing the structure in the chaos*.
+
+Today, you'll practice that skill on a real application.
+
+---
+
 ## What This Lesson Is About
 
 You know SQL. You can write a SELECT, a JOIN, a GROUP BY. But have you ever looked at an application — like LinkedIn or Workday — and thought: *"What's the data model underneath this?"*
