@@ -43,24 +43,47 @@ This is a classic pattern you'll see everywhere — AWS IAM, GitHub organization
 
 ### The ER Shape
 
-```
-┌──────────────┐     ┌──────────────┐     ┌──────────────────┐     ┌───────────────┐
-│    users     │     │  user_roles  │     │      roles       │     │role_permissions│
-├──────────────┤     ├──────────────┤     ├──────────────────┤     ├───────────────┤
-│ id           │────<│ user_id      │>────│ id               │────<│ role_id       │
-│ org_id       │     │ role_id      │     │ organization_id  │     │ permission_id │
-│ email        │     │ granted_at   │     │ name             │     │ conditions    │
-│ first_name   │     │ granted_by_id│     │ description      │     └───────┬───────┘
-│ last_name    │     └──────────────┘     │ system_role      │             │
-│ active       │                          └──────────────────┘             │
-└──────────────┘                                                   ┌──────┴───────┐
-                                                                   │ permissions  │
-                                                                   ├──────────────┤
-                                                                   │ id           │
-                                                                   │ resource     │
-                                                                   │ action       │
-                                                                   │ description  │
-                                                                   └──────────────┘
+```mermaid
+erDiagram
+    users {
+        int id PK
+        int org_id FK
+        string email
+        string first_name
+        string last_name
+        boolean active
+    }
+    user_roles {
+        int id PK
+        int user_id FK
+        int role_id FK
+        datetime granted_at
+        int granted_by_id FK
+    }
+    roles {
+        int id PK
+        int organization_id FK
+        string name
+        string description
+        boolean system_role
+    }
+    role_permissions {
+        int id PK
+        int role_id FK
+        int permission_id FK
+        json conditions
+    }
+    permissions {
+        int id PK
+        string resource
+        string action
+        string description
+    }
+
+    users ||--o{ user_roles : "has"
+    roles ||--o{ user_roles : "assigned to"
+    roles ||--o{ role_permissions : "grants"
+    permissions ||--o{ role_permissions : "granted by"
 ```
 
 > 🔗 See the full Mermaid ERD: [artifacts/erd/rbac-model.md](./artifacts/erd/rbac-model.md)
@@ -160,32 +183,60 @@ This is the core of an ATS: companies post **jobs**, **candidates** apply, and t
 
 ### The ER Shape
 
-```
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│organizations │     │    jobs      │     │  candidates   │
-├──────────────┤     ├──────────────┤     ├──────────────┤
-│ id           │────<│ id           │     │ id            │
-│ name         │     │ org_id       │     │ org_id        │
-│ subdomain    │     │ department_id│     │ first_name    │
-└──────────────┘     │ title        │     │ last_name     │
-                     │ status       │     │ email         │
-                     │ hiring_mgr_id│──>users              │
-                     │ recruiter_id │──>users              │
-                     └──────┬───────┘     └───────┬───────┘
-                            │                     │
-                     ┌──────┴──────────────────────┴──────┐
-                     │          applications              │
-                     ├────────────────────────────────────┤
-                     │ id                                 │
-                     │ organization_id                    │
-                     │ job_id ──────────────> jobs        │
-                     │ candidate_id ────────> candidates  │
-                     │ current_stage_id ────> stages      │
-                     │ status (state machine)             │
-                     │ source_type                        │
-                     │ applied_at                         │
-                     │ hired_at / rejected_at             │
-                     └────────────────────────────────────┘
+```mermaid
+erDiagram
+    organizations {
+        int id PK
+        string name
+        string subdomain
+    }
+    jobs {
+        int id PK
+        int org_id FK
+        int department_id FK
+        string title
+        string status
+        int hiring_manager_id FK
+        int recruiter_id FK
+    }
+    candidates {
+        int id PK
+        int org_id FK
+        string first_name
+        string last_name
+        string email
+    }
+    applications {
+        int id PK
+        int organization_id FK
+        int job_id FK
+        int candidate_id FK
+        int current_stage_id FK
+        string status
+        string source_type
+        datetime applied_at
+        datetime hired_at
+        datetime rejected_at
+    }
+    stages {
+        int id PK
+        string name
+        int position
+    }
+    users {
+        int id PK
+        string email
+        string first_name
+        string last_name
+    }
+
+    organizations ||--o{ jobs : "posts"
+    organizations ||--o{ candidates : "tracks"
+    jobs ||--o{ applications : "receives"
+    candidates ||--o{ applications : "submits"
+    stages ||--o{ applications : "current stage"
+    users ||--o{ jobs : "hiring_manager"
+    users ||--o{ jobs : "recruiter"
 ```
 
 > 🔗 See the full Mermaid ERD: [artifacts/erd/pipeline-model.md](./artifacts/erd/pipeline-model.md)
