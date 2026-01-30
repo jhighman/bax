@@ -1,35 +1,50 @@
 # Setup Instructions
 
-## Getting Legoria Running
+## The Database Is Included
 
-Legoria is a Rails 8 app on GitHub. You need to clone it and set it up locally.
+The Legoria SQLite database is bundled right here in this module — no servers to run, no Ruby to install.
 
-**Source code:** [github.com/jhighman/legoria](https://github.com/jhighman/legoria)
-
-### 🪟 On Windows?
-
-See the full step-by-step guide: **[SETUP-WINDOWS.md](./SETUP-WINDOWS.md)**
-
-It covers WSL vs. native Ruby, installing dependencies, and all the Windows-specific gotchas.
-
-### Quick Setup (Mac/Linux)
-
-```bash
-# Prerequisites: Ruby 3.4.5, Bundler, SQLite3
-git clone https://github.com/jhighman/legoria.git
-cd legoria
-bundle install
-bin/rails db:create db:migrate db:seed
-bin/rails runner script/build_rich_scenario.rb
-bin/rails server
+```
+data/legoria.sqlite3    ← the database (all you need)
+data/seeds.rb           ← how the base data was created (reference)
+data/build_rich_scenario.rb  ← how the 7 candidates were created (reference)
 ```
 
-Open http://localhost:3000 — you're in.
+## Getting Started
 
-## Connecting to the Application
+### 1. Open the database
 
-1. **Open the web app:** [http://localhost:3000](http://localhost:3000)
-2. **Log in with one of these accounts:**
+```bash
+cd course/modules/02-legoria-er-sql/data
+sqlite3 legoria.sqlite3
+```
+
+> 🪟 **On Windows?** See [SETUP-WINDOWS.md](./SETUP-WINDOWS.md) for how to install SQLite.  
+> 🍎 **On Mac?** SQLite is pre-installed. Just run the command above.  
+> 🐧 **On Linux?** `sudo apt install sqlite3` if you don't have it.
+
+### 2. Set up pretty output
+
+```sql
+.headers on
+.mode column
+```
+
+### 3. Verify it works
+
+```sql
+SELECT first_name, last_name, email FROM users;
+```
+
+You should see 4 users: Alice Admin, Rachel Recruiter, Henry Manager, and Ian Viewer.
+
+### 4. Follow the lesson
+
+Open [README.md](./README.md) and start with Part 1. Run each SQL exercise in your SQLite console.
+
+---
+
+## Login Credentials (for the GUI, if running the full app)
 
 | Role | Email | Password |
 |------|-------|----------|
@@ -38,56 +53,52 @@ Open http://localhost:3000 — you're in.
 | **Hiring Manager** | `hiring.manager@acme.test` | `password123` |
 | **Interviewer** | `interviewer@acme.test` | `password123` |
 
-> 💡 Start with **Admin** — it has full access to everything. Later we'll explore what other roles can and can't see.
+> For this lesson, you only need the SQLite console. The GUI is optional — see [github.com/jhighman/legoria](https://github.com/jhighman/legoria) if you want to run the full web app.
 
-## Accessing the SQLite Console
+---
 
-This is where you'll run all the SQL exercises:
+## What's in the Database
 
-```bash
-cd /path/to/legoria
-rails dbconsole
-```
+The database is pre-loaded with realistic hiring data for **Acme Corporation**:
 
-This drops you into the SQLite shell. You can run any SQL query directly.
+- **4 users** with distinct roles (Admin, Recruiter, Hiring Manager, Interviewer)
+- **4 roles** with graduated permissions (Admin has everything, Interviewer has read-only)
+- **36 permissions** as resource + action pairs (candidates.read, jobs.create, etc.)
+- **7 candidates** — each with a unique hiring story:
+  - **Sarah Chen** → Full pipeline, HIRED (6 stage transitions, 3 interviews, offer accepted)
+  - **Michael Johnson** → REJECTED after technical interview (documented decision)
+  - **Jennifer Davis** → IN PROGRESS, hot candidate with competing offer
+  - **James Wilson** → JUST APPLIED, fresh application, no activity yet
+  - **David Brown** → WITHDRAWN (took Salesforce offer, added to talent pool)
+  - **Emily Williams** → STUCK IN SCREENING for 19 days (bottleneck scenario)
+  - **Robert Miller** → Strong PM candidate, ready for onsite interview
+- **19 stage transitions** tracking every pipeline movement
+- **10 interviews** (technical, cultural, panel)
+- **2 hiring decisions** with documented rationale
+- **1 offer** (Sarah Chen, accepted)
+- **8 candidate notes** from recruiters and interviewers
 
-**Useful SQLite commands:**
-```
-.tables              -- List all tables
-.schema users        -- Show CREATE TABLE for users
-.headers on          -- Show column headers in output
-.mode column         -- Pretty-print output in columns
-.quit                -- Exit
-```
+This is not lorem ipsum. Every candidate has a story you can trace through the tables.
 
-> 🎯 **Pro tip:** Run `.headers on` and `.mode column` first. It makes the output way easier to read.
+---
 
-## What's in the Seeded Database
+## Useful SQLite Commands
 
-The database comes pre-loaded with realistic test data:
+| Command | What It Does |
+|---------|-------------|
+| `.tables` | List all tables |
+| `.schema tablename` | Show CREATE TABLE statement |
+| `.headers on` | Show column names in output |
+| `.mode column` | Align output in columns |
+| `.quit` | Exit SQLite |
 
-| Entity | Count | Notes |
-|--------|-------|-------|
-| Organizations | 1 | Acme Corporation |
-| Users | 4 | Admin, Recruiter, Hiring Manager, Interviewer |
-| Roles | 4 | admin, recruiter, hiring_manager, interviewer |
-| Permissions | ~36 | Resource + action pairs (candidates.read, jobs.create, etc.) |
-| Candidates | 7 | Including Sarah Chen (our main example) |
-| Jobs | 4-5 | Various open/draft/closed positions |
-| Applications | ~10 | Candidates applied to jobs, various stages |
-| Stages | 6-7 | Applied → Screening → Interview → Offer → Hired (+ Rejected) |
-| Departments | 3-4 | Engineering, Marketing, etc. |
+> 🎯 **Pro tip:** Run `.headers on` and `.mode column` first thing every time. It makes the output way easier to read.
 
-## Lesson Flow
-
-1. **Start here:** Open the web app and the SQLite console side by side
-2. **Part 1 (RBAC):** Log in as Admin, explore Users and Roles pages while running RBAC queries
-3. **Part 2 (Pipeline):** Explore Dashboard, Jobs, Candidates while running pipeline queries
-4. **Part 3 (Bridge):** Pick a page and trace it back to the SQL
-5. **Part 4 (Challenge):** Combine both domains in one query
+---
 
 ## Troubleshooting
 
-- **App won't load?** Make sure the Rails server is running: `cd /path/to/legoria && rails server`
-- **SQLite error?** Make sure you're in the Legoria directory before running `rails dbconsole`
-- **Table not found?** Run `.tables` to see what's available — table names might be slightly different than expected
+- **"unable to open database"** — Make sure you're in the `data/` directory, or use the full path to `legoria.sqlite3`
+- **"no such table"** — Run `.tables` to see what's available. Table names are lowercase and pluralized (e.g., `users`, `applications`, `stage_transitions`)
+- **Output is ugly** — Run `.headers on` and `.mode column`
+- **Want to reset?** The database file is read-only from git. If you mess it up: `git checkout -- data/legoria.sqlite3`
