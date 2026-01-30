@@ -91,3 +91,5 @@ course/examples/*/config/master.key
 
 # Ignore application configuration
 course/examples/*/config/application.yml
+# Allow bundled Legoria database for Module 2
+!course/modules/02-legoria-er-sql/data/legoria.sqlite3
